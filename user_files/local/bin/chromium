@@ -1,0 +1,11 @@
+#
+# ~/local/bin/chromium
+#
+#!/bin/sh
+X=$(pidof Xorg)
+
+if [ -n "$X" ]; then
+  /usr/bin/chromium "$@"
+else
+  /usr/bin/chromium --enable-features=UseOzonePlatform --ozone-platform=wayland  "$@"
+fi

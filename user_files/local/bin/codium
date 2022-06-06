@@ -1,0 +1,11 @@
+#
+# ~/local/bin/codium
+#
+#!/bin/sh
+X=$(pidof Xorg)
+
+if [ -n "$X" ]; then
+  /usr/bin/codium "$@"
+else
+  /usr/bin/codium --enable-features=UseOzonePlatform --ozone-platform=wayland  "$@"
+fi

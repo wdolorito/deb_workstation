@@ -1,0 +1,8 @@
+#
+# ~/local/bin/sway
+#
+#!/bin/sh
+export QT_QPA_PLATFORM=wayland
+export MOZ_ENABLE_WAYLAND=1
+
+/usr/bin/sway

@@ -1,0 +1,22 @@
+use devuan disk image from https://github.com/13pgeiser/debian_chromebook_XE303C12
+install i3wm
+install runit-init
+
+do not install build-essential, c/c++ compilers, libdvd-pkg from repo (custom kernel interferes)
+~~add make, patch~~
+
+~~clang:~~
+~~https://github.com/llvm/llvm-project/releases/ (tested 13.0.1)~~
+~~libtinfo5 <-- for clang~~
+
+bluez
+pulseaudio-module-bluetooth <-- for bluetooth audio
+pm-utils
+
+bluetooth:
+bluetoothctl
+scan on <-- put device to be connected in pairing mode, wait for device to appear
+pair <first few characters of MAC><tab> <-- for autocomplete
+connect <first few characters of MAC><tab>
+trust <first few characters of MAC><tab>
+when device comes near, it will autoconnect

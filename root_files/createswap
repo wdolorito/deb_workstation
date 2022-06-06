@@ -1,0 +1,13 @@
+#!/bin/sh
+SWAP=/swapfile
+SIZE=$(free -h | sed -n 2p | awk '{print $2}' | cut -d '.' -f 1)
+if [ $(exprt $SIZE "%" 2) -gt 0 ]; then
+  SIZE=$(expr $SIZE "+" 1)
+fi
+SIZE=$(expr $SIZE "*" 2)
+
+dd if=/dev/zero of=$SWAP bs=500M count=$SIZE &&
+chmod 600 $SWAP
+mkswap $SWAP
+echo "" >> /etc/fstab
+echo "/swapfile none swap sw 0 0" >> /etc/fstab

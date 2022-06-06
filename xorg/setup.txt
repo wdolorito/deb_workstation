@@ -1,0 +1,7 @@
+i3
+xinit
+xss-lock
+feh
+rofi
+
+purge xterm suckless-tools

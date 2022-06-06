@@ -1,0 +1,12 @@
+#
+# ~/local/bin/bright_key
+#
+#!/bin/sh
+DEV=smc::kbd_backlight
+if [ "$1" = "up" ]; then
+  brightnessctl -qd $DEV  set +10%
+fi
+if [ "$1" = "down" ]; then
+  brightnessctl -qd $DEV  set 10%-
+fi
+brightnessctl -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "(%)"

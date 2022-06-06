@@ -1,0 +1,5 @@
+#
+# ~/local/bin/shutdown
+#
+#!/bin/sh
+/sbin/shutdown "$@"

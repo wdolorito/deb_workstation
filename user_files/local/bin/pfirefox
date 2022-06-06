@@ -1,0 +1,5 @@
+#
+# ~/local/bin/pfirefox
+#
+#!/bin/sh
+firefox-esr --private-window "$@"

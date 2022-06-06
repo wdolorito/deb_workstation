@@ -1,0 +1,6 @@
+#
+#  ~/local/runit-services/service/run
+#
+#!/bin/sh -e
+exec 2>&1
+exec <path to program>

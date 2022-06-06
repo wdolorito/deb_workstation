@@ -1,0 +1,5 @@
+#
+# ~/local/bin/reboot
+#
+#!/bin/sh
+/sbin/reboot "$@"

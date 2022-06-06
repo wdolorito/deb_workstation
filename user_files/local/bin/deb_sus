@@ -1,0 +1,6 @@
+#
+# ~/local/bin/deb_sus
+#
+#!/bin/sh
+systemctl hybrid-sleep
+physlock -dmsp "Unlock Me"

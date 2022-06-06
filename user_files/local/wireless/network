@@ -1,0 +1,17 @@
+#
+# ~/local/wireless/<network>
+#
+ctrl_interface=DIR=/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=US
+
+#
+# generate next few lines: wpa_passphrase <network> <passphrase> >> ~/local/wireless/<network>
+# add scan_ssid=1 for hidden network
+#
+network={
+	ssid=<network>
+	scan_ssid=1
+	psk=1234567890123456789012345678901234567890123456
+	key_mgmt=WPA-PSK
+}

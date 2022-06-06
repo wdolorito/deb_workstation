@@ -1,0 +1,11 @@
+#
+# ~/local/bin/imv
+#
+#!/bin/sh
+X=$(pidof Xorg)
+
+if [ -n "$X" ]; then
+  imv-x11 "$@"
+else
+  imv-wayland "$@"
+fi

@@ -1,0 +1,53 @@
+#
+# ~/.config/i3status/config
+#
+general {
+        colors = true
+        interval = 5
+}
+
+order += "volume master"
+order += "wireless _first_"
+order += "cpu_usage"
+order += "read_file BATT"
+order += "memory"
+order += "read_file BRIGHT"
+order += "tztime local"
+
+volume master {
+        format = "♪: %volume"
+        format_muted = "♪: muted (%volume)"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+wireless _first_ {
+        format_up = "W: %ip"
+        format_down = "W: down"
+}
+
+cpu_usage {
+        format = "CPU %usage"
+        max_threshold = 75
+}
+
+read_file BATT {
+       format = "%content"
+       path = "/home/<user>/.batt"
+}
+
+memory {
+        format = "%used"
+        threshold_degraded = "500M"
+        format_degraded = "MEMORY < %available"
+}
+
+read_file BRIGHT {
+        format = " %content"
+        path = "/home/<user>/.bright"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M %Z"
+}

@@ -1,0 +1,12 @@
+sway
+swayidle
+wofi
+waybar
+wev
+mako-notifier
+wdisplays <-- run fix_wdisplays.sh after install/update
+wob
+qtwayland5
+xwayland
+
+purge foot suckless-tools sway-backgrounds

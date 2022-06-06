@@ -1,0 +1,96 @@
+Debian Bullseye (11) nonfree firmware netinstall
+or
+Devuan Chimaera (4) netinstall
+
+doas
+neofetch
+physlock
+
+sakura
+
+pulseaudio
+pulseaudio-utils
+pavucontrol
+brightnessctl <--  usermod -a -G <user> input (also for keyboard backlight ie. mbp 5,5)
+
+add if have bluetooth:
+bluez
+pulseaudio-module-bluetooth
+
+imv
+mpv
+rename
+mediainfo
+brasero
+
+p7zip-full
+
+contrib non-free packages:
+libdvd-pkg <-- dkg-reconfigure libdvd-pkg
+p7zip-rar
+
+git
+clang
+lldb
+lld
+ninja-build
+cmake
+build-essential
+default-jdk
+nodejs
+npm
+
+gnome-disk-utility
+testdisk
+cgpt
+command-not-found <-- update-command-not-found
+apt-file <-- apt-file update
+
+acl
+lxc <-- cd <user> && setfacl -m u:<user subuid>:x . .local .local/share
+virt-manager <-- usermod -a -G libvirt <user> (to use virt-manager gui)
+qemu-user-static
+remmina-plugin-vnc <-- install if !install virt-manager (pulls remote-viewer)
+
+libreoffice <-- runs in xwayland for some reason :(
+inkscape
+transmission-gtk
+gnome-session-canberra <-- for transmission sounds
+
+cura
+freecad
+openscad
+kicad <-- does not run in wayland; wxWidgets incompatibility :(
+
+fonts-recommended
+fonts:
+https://fonts.google.com/specimen/Inconsolata
+https://fontawesome.com/download
+
+libpam-gnome-keyring <-- run fix_pam.sh after install
+seahorse
+vscodium:
+https://vscodium.com
+
+firefox-esr <-- run set_default_browser to fix sensible-browser links
+chromium ~~or~~
+google chrome: <-- run fix_chrome.sh after install/update
+https://google.com/chrome
+
+uBlock Origin:
+https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/
+https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
+
+Privacy Badger:
+https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17/
+https://chrome.google.com/webstore/detail/privacy-badger/pkehgijcmpdhfbdbbnkijodmdjhbjlgp
+
+React devtools:
+https://addons.mozilla.org/en-US/firefox/addon/react-devtools/
+https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
+
+gimp: get version >= 2.99.2 for wayland support until show up in repos
+https://github.com/aferrero2707/gimp-appimage/releases
+or just install gimp from repo and let it run in xwayland
+
+purge lxc-templates

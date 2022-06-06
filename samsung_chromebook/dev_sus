@@ -1,0 +1,6 @@
+#
+# ~/local/bin/dev_sus
+#
+#!/bin/sh
+doas /usr/sbin/pm-suspend "$@"
+physlock -dmsp "Unlock Me"

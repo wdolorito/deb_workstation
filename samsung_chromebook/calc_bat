@@ -1,0 +1,43 @@
+#
+# ~/local/bin/calc_bat
+#
+#!/bin/sh
+SYSP=/sys/class/power_supply
+BATT=sbs-104-000b
+FILE=~/.batt
+STAT=$(cat $SYSP/$BATT/status)
+TTEAS=$(cat $SYSP/$BATT/time_to_empty_avg)
+TTFAS=$(cat $SYSP/$BATT/time_to_full_avg)
+
+div_60 () {
+  return $(expr $1 / 60)
+}
+
+mod_60 () {
+  return $(expr $1 % 60)
+}
+
+if [ "$STAT" = "Full" ]; then
+  echo '☻ FULL' > $FILE
+elif [ "$STAT" = "Discharging" ]; then
+  div_60 $TTEAS
+  MINT=$?
+  div_60 $MINT
+  HOURS=$?
+  mod_60 $MINT
+  MINR=`printf %02d $?`
+
+  echo "🔋 $HOURS:$MINR rem" > $FILE
+elif [ "$STAT" = "Charging" ]; then
+  div_60 $TTFAS
+  MINT=$?
+  div_60 $MINT
+  HOURS=$?
+  mod_60 $MINT
+  MINR=`printf %02d $?`
+
+  echo "⚡ $HOURS:$MINR chr" > $FILE
+else
+  echo "No battery" > $FILE
+fi
+exit 0

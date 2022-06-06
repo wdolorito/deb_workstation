@@ -1,0 +1,31 @@
+#!/bin/sh
+FSTAB=/etc/fstab
+SUB=/mnt/@swap
+MOUNT=/var/swap
+SWAP=$MOUNT/swapfile
+ROOTFS=$(blkid| grep btrfs | awk '{print $3}' | tr -d '"')
+SIZE=$(free -h | sed -n 2p | awk '{print $2}' | cut -d '.' -f 1)
+if [ $(exprt $SIZE "%" 2) -gt 0 ]; then
+  SIZE=$(expr $SIZE "+" 1)
+fi
+SIZE=$(expr $SIZE "*" 2)
+
+if [ ! -d $SUB ]; then
+  btrfs sub create $SUB
+  chattr +C $SUB
+  echo "" >> $FSTAB
+  echo "# swapfile" >> $FSTAB
+  echo "$ROOTFS $MOUNT btrfs subvol=$SUB,rw,noatime,ssd 0 0" >> $FSTAB
+  if [ ! -d $MOUNT ]; then
+    mkdir -p $MOUNT
+  fi
+fi
+
+if [ ! -f $SWAP ]; then
+  dd if=/dev/zero of=$SWAP bs=500M count=$SIZE &&
+  chmod 600 $SWAP
+  mkswap $SWAP
+  echo "" >> /etc/fstab
+  echo "/swapfile none swap sw 0 0" >> /etc/fstab
+  swapon -a
+fi
