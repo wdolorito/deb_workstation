@@ -52,7 +52,7 @@ virt-manager <-- usermod -a -G libvirt <user> (to use virt-manager gui)
 qemu-user-static
 remmina-plugin-vnc <-- install if !install virt-manager (pulls remote-viewer)
 
-libreoffice <-- runs in xwayland for some reason :(
+libreoffice-gtk3
 inkscape
 transmission-gtk
 gnome-session-canberra <-- for transmission sounds
