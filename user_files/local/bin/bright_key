@@ -5,10 +5,16 @@
 #
 
 DEV=smc::kbd_backlight
-if [ "$1" = "up" ]; then
-  brightnessctl -qd $DEV  set +10%
-fi
-if [ "$1" = "down" ]; then
-  brightnessctl -qd $DEV  set 10%-
-fi
+case "$1" in
+  "up")
+    brightnessctl -qd $DEV  set +10%
+    ;;
+  "down")
+    brightnessctl -qd $DEV set 10%-
+    ;;
+  *)
+    ;;
+esac
+
+
 brightnessctl -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "(%)"

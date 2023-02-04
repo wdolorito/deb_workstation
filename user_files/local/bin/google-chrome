@@ -6,7 +6,8 @@
 
 X=$(pidof Xorg)
 
-if [ -n "$X" ]; then
+if [ -n "$X" ]
+then
   /usr/bin/google-chrome-stable "$@"
 else
   /usr/bin/google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"

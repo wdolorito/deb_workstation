@@ -19,27 +19,33 @@ mod_60 () {
   return $(expr $1 % 60)
 }
 
-if [ "$STAT" = "Full" ]; then
-  echo '☻ FULL' > $FILE
-elif [ "$STAT" = "Discharging" ]; then
-  div_60 $TTEAS
-  MINT=$?
-  div_60 $MINT
-  HOURS=$?
-  mod_60 $MINT
-  MINR=`printf %02d $?`
 
-  echo "🔋 $HOURS:$MINR rem" > $FILE
-elif [ "$STAT" = "Charging" ]; then
-  div_60 $TTFAS
-  MINT=$?
-  div_60 $MINT
-  HOURS=$?
-  mod_60 $MINT
-  MINR=`printf %02d $?`
+case "$STAT" in
+  "Full")
+    echo '☻ FULL' > $FILE
+    ;;
+  "Discharging")
+    div_60 $TTEAS
+    MINT=$?
+    div_60 $MINT
+    HOURS=$?
+    mod_60 $MINT
+    MINR=`printf %02d $?`
 
-  echo "⚡ $HOURS:$MINR chr" > $FILE
-else
-  echo "No battery" > $FILE
-fi
+    echo "🔋 $HOURS:$MINR rem" > $FILE
+    ;;
+  "Charging")
+    div_60 $TTFAS
+    MINT=$?
+    div_60 $MINT
+    HOURS=$?
+    mod_60 $MINT
+    MINR=`printf %02d $?`
+
+    echo "⚡ $HOURS:$MINR chr" > $FILE
+    ;;
+  *)
+    echo "No battery" > $FILE
+    ;;
+esac
 exit 0

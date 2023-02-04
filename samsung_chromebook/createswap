@@ -5,7 +5,8 @@ MOUNT=/var/swap
 SWAP=$MOUNT/swapfile
 ROOTFS=$(blkid| grep btrfs | awk '{print $3}' | tr -d '"')
 SIZE=$(free -h | sed -n 2p | awk '{print $2}' | cut -d '.' -f 1)
-if [ $(expr $SIZE "%" 2) -gt 0 ]; then
+if [ $(expr $SIZE "%" 2) -gt 0 ]
+then
   SIZE=$(expr $SIZE "+" 1)
 fi
 SIZE=$(expr $SIZE "*" 2)
@@ -23,7 +24,8 @@ then
   fi
 fi
 
-if [ ! -f $SWAP ]; then
+if [ ! -f $SWAP ]
+then
   dd if=/dev/zero of=$SWAP bs=500M count=$SIZE &&
   chmod 600 $SWAP
   mkswap $SWAP

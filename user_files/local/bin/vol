@@ -5,18 +5,24 @@
 #
 
 CURR=$(pactl list sinks | grep front-left: | awk '{print $5}' | tr -d '%')
-if [ "$1" = "up" ]; then
-  if [ "$CURR" -lt 96 ]; then
-    pactl set-sink-volume @DEFAULT_SINK@ +5%
-  fi
-fi
-if [ "$1" = "down" ]; then
-  pactl set-sink-volume @DEFAULT_SINK@ -5%
-fi
-if [ "$1" = "mute" ]; then
-  pactl set-sink-mute @DEFAULT_SINK@ toggle
-fi
-if [ "$1" = "mic" ]; then
-  pactl set-source-mute @DEFAULT_SOURCE@ toggle
-fi
-pactl list sinks | grep 'Volume: front-left' | awk '{print $5}' | tr -d '%'
+case "$1" in
+  "up")
+    if [ "$CURR" -lt 96 ]
+    then
+      pactl set-sink-volume @DEFAULT_SINK@ +5%
+    fi
+    ;;
+  "down")
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
+    ;;
+  "mute")
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+    ;;
+  "mic")
+    pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    ;;
+  *)
+    ;;
+esac
+
+pactl list sinks | grep 'Volume: front-left' | tail -n 1 | awk '{print $5}' | tr -d '%'
