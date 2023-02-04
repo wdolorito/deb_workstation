@@ -1,5 +1,7 @@
+#!/bin/sh
+
 #
 # ~/local/bin/dmesg
 #
-#!/bin/sh
+
 doas /usr/bin/dmesg

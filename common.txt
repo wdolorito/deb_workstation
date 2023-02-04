@@ -5,19 +5,23 @@ Devuan Chimaera (4) netinstall
 doas
 neofetch
 physlock
+shellcheck
 
 sakura
+tmux
+fbterm <--  setcap 'cap_sys_tty_config+ep' /usr/bin/fbterm
 
 pulseaudio
 pulseaudio-utils
 pavucontrol
-brightnessctl <--  usermod -a -G <user> input (also for keyboard backlight ie. mbp 5,5)
+brightnessctl <--  usermod -a -G input <user> (also for keyboard backlight ie. mbp 5,5)
 
 add if have bluetooth:
 bluez
 pulseaudio-module-bluetooth
 
 imv
+fbi
 mpv
 rename
 mediainfo
@@ -26,7 +30,7 @@ brasero
 p7zip-full
 
 contrib non-free packages:
-libdvd-pkg <-- dkg-reconfigure libdvd-pkg
+libdvd-pkg <--  dkg-reconfigure libdvd-pkg
 p7zip-rar
 
 git
@@ -37,8 +41,6 @@ ninja-build
 cmake
 build-essential
 default-jdk
-nodejs
-npm
 
 gnome-disk-utility
 testdisk
@@ -94,3 +96,4 @@ https://github.com/aferrero2707/gimp-appimage/releases
 or just install gimp from repo and let it run in xwayland
 
 purge lxc-templates
+dpkg-reconfigure tzdata

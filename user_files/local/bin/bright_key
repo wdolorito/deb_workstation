@@ -1,7 +1,9 @@
+#!/bin/sh
+
 #
 # ~/local/bin/bright_key
 #
-#!/bin/sh
+
 DEV=smc::kbd_backlight
 if [ "$1" = "up" ]; then
   brightnessctl -qd $DEV  set +10%

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+#
+# ~/local/bin/start_tmux
+#
+
+SESSION=main
+
+if ! tmux has-session -t="$SESSION"
+then
+  TMUX="" tmux new-session -d -s "$SESSION"
+fi
+
+if [ "$TMUX" = "" ]
+then
+  fbterm -- tmux attach-session -t "$SESSION"
+else
+  fbterm -- tmux switch-client -t "$SESSION"
+fi

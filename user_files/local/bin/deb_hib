@@ -1,6 +1,8 @@
+#!/bin/sh
+
 #
 # ~/local/bin/deb_hib
 #
-#!/bin/sh
+
 systemctl hibernate
 physlock -dmsp "Unlock Me"

@@ -1,7 +1,9 @@
+#!/bin/sh
+
 #
 # ~/local/bin/start_home
 #
-#!/bin/sh
-IFACE=wlan0
+
+IFACE=$(ip a | grep ^[0-9] | awk '{print $2}' | cut -d : -f 1 | grep ^w)
 wpa_supplicant -i $IFACE -B -c ~/local/wireless/<network>
 dhclient -v $IFACE

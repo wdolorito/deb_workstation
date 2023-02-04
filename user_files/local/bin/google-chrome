@@ -1,7 +1,9 @@
+#!/bin/sh
+
 #
 # ~/local/bin/google-chrome
 #
-#!/bin/sh
+
 X=$(pidof Xorg)
 
 if [ -n "$X" ]; then

@@ -1,7 +1,8 @@
 #!/bin/sh
 SWAP=/swapfile
 SIZE=$(free -h | sed -n 2p | awk '{print $2}' | cut -d '.' -f 1)
-if [ $(exprt $SIZE "%" 2) -gt 0 ]; then
+if [ $(expr $SIZE "%" 2) -gt 0 ]
+then
   SIZE=$(expr $SIZE "+" 1)
 fi
 SIZE=$(expr $SIZE "*" 2)

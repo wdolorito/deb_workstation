@@ -1,18 +1,22 @@
+#!/bin/sh
+
 #
 # ~/local/bin/bright
 #
-#!/bin/sh
+
 X=$(pidof Xorg)
 DEV=acpi_video0
-if [ "$1" = "up" ]; then
+if [ "$1" = "up" ]
+then
   brightnessctl -qd $DEV  set +5%
 fi
-if [ "$1" = "down" ]; then
+if [ "$1" = "down" ]
+then
   brightnessctl -qd $DEV set 5%-
 fi
 
-if [ -n "$X" ]; then
-if
+if [ -n "$X" ]
+then
   brightnessctl -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "()" > ~/.bright
 else
   brightnessctl -D $DEV | sed -n 2p | awk '{print $4}' | tr -d "(%)"

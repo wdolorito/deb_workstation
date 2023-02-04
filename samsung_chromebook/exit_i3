@@ -1,7 +1,8 @@
+#!/bin/sh
+
 #
 # ~/local/bin/exit_i3
 #
-#!/bin/sh
 
 # clean up battery script
 kill -9 $(pidof watch)

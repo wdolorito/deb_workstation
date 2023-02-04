@@ -46,6 +46,7 @@
 │   │   └── waybar
 │   │       ├── config
 │   │       └── style.css
+│   ├── .fbtermrc
 │   ├── fix_i3status.sh
 │   ├── fix_profile.sh
 │   ├── fix_trans.sh
@@ -55,6 +56,7 @@
 │   │   ├── Font Awesome 6 Free-Solid-900.otf
 │   │   └── Inconsolata-VariableFont_wdth,wght.ttf
 │   ├── .gitconfig
+│   ├── install_node_local.sh
 │   ├── local
 │   │   ├── AppImage
 │   │   │   └── GIMP_AppImage-git-2.99.3-20201112-x86_64.AppImage
@@ -77,6 +79,7 @@
 │   │   │   ├── reboot
 │   │   │   ├── shutdown
 │   │   │   ├── start_home
+│   │   │   ├── start_tmux
 │   │   │   ├── sway
 │   │   │   ├── vol
 │   │   │   └── wpa_supplicant
@@ -85,12 +88,10 @@
 │   │   │       └── run
 │   │   └── wireless
 │   │       └── network
-│   └── .ssh
-│       └── config
+│   ├── .ssh
+│   │   └── config
+│   └── .tmux.conf
 ├── wayland
-│   ├── fix_chrome.sh
-│   ├── fix_chromium.sh
-│   ├── fix_codium.sh
 │   ├── fix_wdisplays.sh
 │   └── setup.txt
 └── xorg
@@ -98,12 +99,12 @@
     └── setup.txt
 ```
 
-`wayland` has scripts and a file with packages to install for sway/wayland.  `xorg` has a touchpad configuration file and a file with packages to install for i3/xorg.  Both window managers may be used side by side with these supporting configuration files if installed at the same time.  `common.txt` are programs chosen that have wayland and xorg compatibility.  Noted exceptions are libreoffice and kicad.
+`wayland` has scripts and a file with packages to install for sway/wayland.  `xorg` has a touchpad configuration file and a file with packages to install for i3/xorg.  Both window managers may be used side by side with these supporting configuration files if installed at the same time.  `common.txt` are programs chosen that have wayland and xorg compatibility.  Noted exception is kicad.
 
-For a pure wayland environment, do not install those two programs and use gimp v2.99.2+, which is not included in Debian 11 nor Devuan 4 repos.  The placeholder in `user_files` is the file name from the AppImage releases of gimp.  `fix_chrome.sh`, `fix_chromium` and `fix_codium.sh` should be run as root whenever those two programs are updated.  If switching between sway and i3; avoid running `google-chrome`, `chromium` or `codium` from their respective `.desktop` files via wofi/rofi.
+For a pure wayland environment, do not install that program and use gimp v2.99.2+, which is not included in Debian 11 nor Devuan 4 repos.  The placeholder in `user_files` is the file name from the AppImage releases of gimp.  `fix_wdisplays.sh` should be run as root whenever that program is updated to restore the icon in wofi/rofi.  If switching between sway and i3; avoid running `google-chrome`, `chromium` or `codium` from their respective `.desktop` files via wofi as they will launch in xwayland.
 
 Copy all files from `user_files` in to user directory as user.  Alternately, copy as root, then `chown -R <user>:<user>` all files.  As user, run `fix_*.sh` scripts from `user_files`.  They may be deleted afterwards.
 
-All files from `root_files` can be copied to `/root` for convenience.  `createswap` will create a `swapfile` at the root of the filesystem and modify `/etc/fstab`.  Modify `doas.conf` for user(s) and copy to `/etc`. `fix_pam.sh` to allow `gnome-keyring` to be used on login for users.  `findswap` will print a line useable for `/etc/default/grub` as well as `/etc/initramfs-tools/conf.d/resume` to enable hibernation. `set_default_browser` to fix `sensible-browser` links.
+All files from `root_files` can be copied to `/root` for convenience.  `createswap` will create a `swapfile` at the root of the filesystem and modify `/etc/fstab`.  Modify `doas.conf` for user(s) and copy to `/etc`. Run `fix_pam.sh` to allow `gnome-keyring` to be used on login for users.  `findswap` will print a line useable for `/etc/default/grub` to enable hibernation. `set_default_browser` to fix `sensible-browser` links (will set firefox-esr).
 
-The `samsung_chromebook` folder has files specific to the first gen [Samsung Arm Chromebook, model XE303C12](https://www.samsung.com/us/business/support/owners/product/chromebook-xe303c12/).  i3/xorg is used over sway/wayland for max compatiblity.  `armhf` binaries for `codium` and `nodejs` development are still available, however c/c++ development is not easily available because development headers are unable to be installed.
+The `samsung_chromebook` folder has files specific to the first gen [Samsung Arm Chromebook, model XE303C12](https://www.samsung.com/us/business/support/owners/product/chromebook-xe303c12/).  i3/xorg is used over sway/wayland for max compatiblity.  `armhf` binaries for `codium` and `nodejs` development are still available, however c/c++ development is not easily available because development headers are unable to be installed..

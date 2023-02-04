@@ -1,7 +1,9 @@
+#!/bin/sh
+
 #
 # ~/local/bin/calc_bat
 #
-#!/bin/sh
+
 SYSP=/sys/class/power_supply
 BATT=sbs-104-000b
 FILE=~/.batt

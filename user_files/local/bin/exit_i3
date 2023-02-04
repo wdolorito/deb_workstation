@@ -1,7 +1,8 @@
+#!/bin/sh
+
 #
 # ~/local/bin/exit_i3
 #
-#!/bin/sh
 
 # clean up brightness
 rm -f ~/.bright

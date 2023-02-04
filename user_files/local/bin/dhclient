@@ -1,5 +1,7 @@
+#!/bin/sh
+
 #
 # ~/local/bin/dhclient
 #
-#!/bin/sh
+
 doas /sbin/dhclient "$@"
