@@ -24,7 +24,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id vol up
 bindsym XF86AudioLowerVolume exec --no-startup-id vol down
 bindsym XF86AudioMute exec --no-startup-id vol mute
 bindsym XF86AudioMicMute exec vol mic
-bindsym mod$+XF86AudioMute exec vol mic
+bindsym $mod+XF86AudioMute exec vol mic
 
 # Brightness
 exec --no-startup-id bright
