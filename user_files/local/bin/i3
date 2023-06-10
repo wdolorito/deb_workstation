@@ -1,11 +1,8 @@
 #!/bin/sh
-
 #
-# ~/local/bin/exit_i3
+# ~/local/bin/i3
 #
+startx
 
 # clean up brightness
 rm -f ~/.bright
-
-# exit
-i3-msg exit

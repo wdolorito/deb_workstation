@@ -4,4 +4,4 @@ xss-lock
 feh
 rofi
 
-purge xterm suckless-tools
+purge suckless-tools

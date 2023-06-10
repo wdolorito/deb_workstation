@@ -32,6 +32,28 @@ display_usage() {
   printf "\tNode archives will be unpacked to\n\t\t%s\n\n" "$UNPACKDIR"
 }
 
+check_paths() {
+  if ! [ -f "$ALIASFILE" ]
+  then
+    touch "$ALIASFILE"
+  fi
+
+  if ! [ -d "$ARCHIVEDIR" ]
+  then
+    mkdir -p "$ARCHIVEDIR"
+  fi
+
+  if ! [ -d "$UNPACKDIR" ]
+  then
+    mkdir -p "$UNPACKDIR"
+  fi
+
+  if ! [ -d "$LOCALBINDIR" ]
+  then
+    mkdir -p "$LOCALBINDIR"
+  fi
+}
+
 link_lts() {
   if [ "$1" = "$LTS" ]
   then
@@ -142,12 +164,14 @@ fi
 
 case "$1" in
   "install")
+    check_paths
     start_it
     ;;
   "remove")
     remove_all
     ;;
   "upgrade")
+    check_paths
     remove_lts
     parse_list "$BASELINK$LTS.x/"
     ;;

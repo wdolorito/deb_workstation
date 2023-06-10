@@ -6,6 +6,7 @@ doas
 neofetch
 physlock
 shellcheck
+pm-utils <-- for devuan suspend and hibernate
 
 sakura
 tmux

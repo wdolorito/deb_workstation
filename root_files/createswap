@@ -5,10 +5,10 @@ if [ $(expr $SIZE "%" 2) -gt 0 ]
 then
   SIZE=$(expr $SIZE "+" 1)
 fi
-SIZE=$(expr $SIZE "*" 2)
+SIZE=$(expr $SIZE "*" 3)
 
 dd if=/dev/zero of=$SWAP bs=500M count=$SIZE &&
 chmod 600 $SWAP
-mkswap $SWAP
+mkswap -L swap $SWAP
 echo "" >> /etc/fstab
 echo "/swapfile none swap sw 0 0" >> /etc/fstab
