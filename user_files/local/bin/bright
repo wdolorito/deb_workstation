@@ -21,5 +21,5 @@ if [ -n "$X" ]
 then
   brightnessctl -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "()" > ~/.bright
 else
-  brightnessctl -D $DEV | sed -n 2p | awk '{print $4}' | tr -d "(%)"
+  brightnessctl -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "(%)"
 fi

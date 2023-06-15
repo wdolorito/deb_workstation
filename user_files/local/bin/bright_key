@@ -16,5 +16,4 @@ case "$1" in
     ;;
 esac
 
-
 brightnessctl -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "(%)"

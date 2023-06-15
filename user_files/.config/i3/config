@@ -9,7 +9,7 @@ font pango:Inconsolata 12
 
 # Locker
 exec --no-startup-id xset s 300
-exec --no-startup-id xss-lock --transfer-sleep-lock -- physlock -dmsp "Unlock Me"
+exec --no-startup-id xss-lock --transfer-sleep-lock -- physlock -dmsp "$(echo -e "$(printf "\n\n%s@%s\n\nUnlock Me" "$(whoami)" "$(cat /etc/hostname)")")"
 
 # Background
 #exec --no-startup-id feh --bg-scale ~/backgrounds/<some image>
