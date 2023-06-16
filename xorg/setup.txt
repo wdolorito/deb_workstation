@@ -3,5 +3,6 @@ xinit
 xss-lock
 feh
 rofi
+arandr
 
 purge suckless-tools
