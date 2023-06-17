@@ -49,7 +49,7 @@ include /etc/sway/config-vars.d/*
 ### Idle configuration
 #
 exec swayidle -w \
-         timeout 600 '$lock' \
+         timeout 300 '$lock' \
          before-sleep '$lock"'
 
 ### Input configuration
