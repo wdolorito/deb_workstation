@@ -1,0 +1,9 @@
+#!/bin/sh
+OSFN="/etc/os-release"
+OSLINE="$(head -n 1 "$OSFN" | tr -d \" | cut -d = -f 2)"
+USER="$(whoami)"
+HOST="$(hostname)"
+USERLINE="$USER"@"$HOST"
+LOCKMSG="Unlock Me"
+
+printf "\n\n%s\n\n%s\n\n%s\n" "$OSLINE" "$USERLINE" "$LOCKMSG"

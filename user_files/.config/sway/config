@@ -38,7 +38,7 @@ set $suspend deb_sus
 set $hibernate deb_hib
 
 # Lock
-set $lock physlock -dmsp "$(printf "\n\n%s@%s\n\nUnlock Me" "$(whoami)" "$(cat /etc/hostname)")"
+set $lock physlock -dmsp "$LOCK_MSG"
 
 include /etc/sway/config-vars.d/*
 
