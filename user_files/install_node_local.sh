@@ -1,16 +1,18 @@
 #!/bin/sh
-VERSIONS="10.x/ 12.x/ 14.x/ 16.x/ 18.x/"
-LTS="18"
-BASELINK="https://nodejs.org/dist/latest-v"
-OSTYPE=$(uname | tr '[:upper:]' '[:lower:]')
-MACHTYPE=$(uname -m)
-TOGET=
-ARCHIVEDIR="$HOME/local/archive"
-UNPACKDIR="$HOME/local/node"
-LOCALBINDIR="$HOME/local/bin"
 GETTER="curl"
 LISTOPTIONS="-s"
 DOWNLOADOPTIONS="-O"
+BASELINK="https://nodejs.org/dist/"
+VERSIONS="$("$GETTER" "$LISTOPTIONS" "$BASELINK" | awk -F ">" '{ print $2 }' | grep "^latest-v" | awk -F "<" '{ print $1 }')"
+VERSIONNUMBERS="$(echo "$VERSIONS" | awk -F "-v" '{ print $2 }' | tr -d '/\r\n' | sed 's/\.x/\ /g')"
+LTS="18"
+CURRENT="20"
+OSTYPE=$(uname | tr '[:upper:]' '[:lower:]')
+MACHTYPE=$(uname -m)
+TOGET=""
+ARCHIVEDIR="$HOME/local/archive"
+UNPACKDIR="$HOME/local/node"
+LOCALBINDIR="$HOME/local/bin"
 ALIASFILE="$HOME/.bash_aliases"
 NODEBINS="corepack node npm npx"
 
@@ -22,14 +24,16 @@ fi
 display_usage() {
   printf "\n\tusage:\t\t%s <option>\n\n" "$0"
   printf "\tWhere <option> is one of the following:\n\n"
-  printf "\tinstall\t- download and install node versions %s\n" "$(echo "$VERSIONS" | sed 's/\.x\///g')(LTS)"
+  printf "\tinstall <version> - where <version> is one of the following:\n\n"
+  printf "\t\t\tLTS: %s\t CURRENT: %s\n" "$LTS" "$CURRENT"
+  printf "\t\t  %s\n\n" "$VERSIONNUMBERS"
   printf "\t\t  will also add aliases to %s\n" "$ALIASFILE"
-  printf "\tremove\t- remove all node versions and downloaded archives\n"
-  printf "\t\t  and remove aliases from %s\n" "$ALIASFILE"
-  printf "\tupgrade\t- remove all LTS versions and download and install current LTS\n"
-  printf "\t\t  and update LTS aliases in %s\n\n" "$ALIASFILE"
+  printf "\tremove\t- remove all node versions, downloaded archives and\n"
+  printf "\t\t  remove aliases from %s\n" "$ALIASFILE"
+  printf "\tupgrade\t- upgrade/install current LTS version %s\n\n" "$LTS"
   printf "\tDownloaded node archives will be stored in\n\t\t%s\n\n" "$ARCHIVEDIR"
   printf "\tNode archives will be unpacked to\n\t\t%s\n\n" "$UNPACKDIR"
+  printf "\tLTS Node binaries will be soft linked in to\n\t\t%s\n\n" "$LOCALBINDIR"
 }
 
 check_paths() {
@@ -162,20 +166,38 @@ then
   fi
 fi
 
-case "$1" in
-  "install")
-    check_paths
-    start_it
-    ;;
-  "remove")
-    remove_all
-    ;;
-  "upgrade")
-    check_paths
-    remove_lts
-    parse_list "$BASELINK$LTS.x/"
-    ;;
-  *)
-    display_usage
-    ;;
-esac
+parse_options() {
+  case "$1" in
+    "install")
+      check_paths
+      start_it
+      ;;
+    "remove")
+      remove_all
+      ;;
+    "upgrade")
+      check_paths
+      remove_lts
+      parse_list "$BASELINK$LTS.x/"
+      ;;
+    *)
+      display_usage
+      ;;
+  esac
+}
+
+if [ -x "$(which $$GETTER)" ]
+then
+  echo "curl installed."
+else
+  echo "Please install curl."
+  exit 1
+fi
+
+if [ -x "/bin/bash" ]
+then
+  parse_options
+else
+  echo "This script is meant to be used with bash as a primary shell."
+  echo ""
+fi
