@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#
+# ~/local/bin/lock_screen
+#
+
+physlock -dmsp "$LOCK_MSG"

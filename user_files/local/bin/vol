@@ -25,4 +25,11 @@ case "$1" in
     ;;
 esac
 
-pactl list sinks | grep 'Volume: front-left' | tail -n 1 | awk '{print $5}' | tr -d '%'
+MUTE=$(pactl list sinks | grep 'Mute:' |  awk '{print $2}')
+
+if [ "$MUTE" = "no" ]
+then
+  pactl list sinks | grep 'Volume: front-left' | tail -n 1 | awk '{print $5}' | tr -d '%'
+else
+  echo "0"
+fi
