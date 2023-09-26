@@ -5,3 +5,6 @@
 #
 
 /sbin/shutdown "$@"
+
+# for Devuan
+# doas /sbin/shutdown "$@"

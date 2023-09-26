@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# ~/local/bin/start_dwm
+#
+printf "%s" "$(bright)%" > ~/.bright
+
+startx
+
+# clean up brightness
+rm -f ~/.bright
+
+# clean up feh
+rm -f ~/.fehbg
+
+# clean dwm log if empty
+
+if ! [ -s "$HOME/.dwm.log" ]
+then
+  rm -f "$HOME/.dwm.log"
+fi
+
+start_tmux

@@ -4,8 +4,8 @@
 # ~/local/bin/bright
 #
 
-X=$(pidof Xorg)
-DEV=acpi_video0
+X="$(pidof Xorg)"
+DEV="acpi_video0"
 case "$1" in
   "up")
     brightnessctl -qd $DEV  set +5%

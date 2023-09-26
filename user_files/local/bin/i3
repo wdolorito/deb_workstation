@@ -1,8 +1,0 @@
-#!/bin/sh
-#
-# ~/local/bin/i3
-#
-startx
-
-# clean up brightness
-rm -f ~/.bright

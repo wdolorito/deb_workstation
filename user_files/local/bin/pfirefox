@@ -4,4 +4,4 @@
 # ~/local/bin/pfirefox
 #
 
-firefox-esr --private-window "$@"
+firefox --private-window "$@"

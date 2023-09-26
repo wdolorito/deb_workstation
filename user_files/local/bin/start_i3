@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# ~/local/bin/start_i3
+#
+startx
+
+# clean up feh
+rm -f ~/.fehbg
+
+# clean up brightness
+rm -f ~/.bright
+
+start_tmux

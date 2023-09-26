@@ -4,4 +4,7 @@
 # ~/local/bin/reboot
 #
 
-/sbin/reboot "$@"
+/sbin/reboot
+
+# for Devuan
+# doas /sbin/reboot
