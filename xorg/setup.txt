@@ -6,3 +6,18 @@ rofi
 arandr
 
 purge suckless-tools
+
+
+### for git suckless
+# install clang + co first from common.txt
+
+xinit
+xss-lock
+feh
+libxft-dev
+libxinerama-dev
+picom
+
+# run compile_suckless.sh
+# copy .xinitrc to $HOME (cp .xinitrc ~/.xinitrc)
+
