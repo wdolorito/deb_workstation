@@ -1,10 +1,11 @@
 # dotfiles and notes for Debian/Devuan stable sway/i3 workstation (laptop centric) installation
+## bonus: compile suckless from source to local home installation xorg notes
 
-## File listing:
+### File listing:
 ```
 .
-├── common.txt
 ├── README.md
+├── common.txt
 ├── root_files
 │   ├── createswap
 │   ├── doas.conf
@@ -37,6 +38,8 @@
 │   │   │   └── config
 │   │   ├── lxc
 │   │   │   └── default.conf
+│   │   ├── picom
+│   │   │   └── picom.conf
 │   │   ├── sakura
 │   │   │   └── sakura.conf
 │   │   ├── sway
@@ -47,56 +50,72 @@
 │   │       ├── config
 │   │       └── style.css
 │   ├── .fbtermrc
-│   ├── fix_i3status.sh
-│   ├── fix_profile.sh
-│   ├── fix_trans.sh
 │   ├── .fonts
 │   │   ├── Font Awesome 6 Brands-Regular-400.otf
 │   │   ├── Font Awesome 6 Free-Regular-400.otf
 │   │   ├── Font Awesome 6 Free-Solid-900.otf
 │   │   └── Inconsolata-VariableFont_wdth,wght.ttf
 │   ├── .gitconfig
-│   ├── install_node_local.sh
-│   ├── local
-│   │   ├── AppImage
-│   │   │   └── GIMP_AppImage-git-2.99.3-20201112-x86_64.AppImage
-│   │   ├── bin
-│   │   │   ├── bright
-│   │   │   ├── bright_key
-│   │   │   ├── chromium
-│   │   │   ├── codium
-│   │   │   ├── deb_hib
-│   │   │   ├── deb_sus
-│   │   │   ├── dhclient
-│   │   │   ├── dmesg
-│   │   │   ├── exit_i3
-│   │   │   ├── gimp -> ../AppImage/GIMP_AppImage-git-2.99.3-20201112-x86_64.AppImage
-│   │   │   ├── google-chrome
-│   │   │   ├── imv
-│   │   │   ├── pchromium
-│   │   │   ├── pfirefox
-│   │   │   ├── pgoogle-chrome
-│   │   │   ├── reboot
-│   │   │   ├── shutdown
-│   │   │   ├── start_home
-│   │   │   ├── start_tmux
-│   │   │   ├── sway
-│   │   │   ├── vol
-│   │   │   └── wpa_supplicant
-│   │   ├── runit-services
-│   │   │   └── service
-│   │   │       └── run
-│   │   └── wireless
-│   │       └── network
 │   ├── .ssh
 │   │   └── config
-│   └── .tmux.conf
+│   ├── .tmux.conf
+│   ├── fix_i3status.sh
+│   ├── fix_profile.sh
+│   ├── fix_trans.sh
+│   ├── install_node_local.sh
+│   └── local
+│       ├── AppImage
+│       │   └── GIMP_AppImage-git-2.99.3-20201112-x86_64.AppImage
+│       ├── bin
+│       │   ├── bright
+│       │   ├── bright_key
+│       │   ├── chromium
+│       │   ├── codium
+│       │   ├── deb_hib
+│       │   ├── deb_sus
+│       │   ├── dev_hib
+│       │   ├── dev_sus
+│       │   ├── dhclient
+│       │   ├── dmesg
+│       │   ├── gimp
+│       │   ├── google-chrome
+│       │   ├── imv
+│       │   ├── lock_msg
+│       │   ├── lock_screen
+│       │   ├── pchromium
+│       │   ├── pfirefox
+│       │   ├── pgoogle-chrome
+│       │   ├── reboot
+│       │   ├── shutdown
+│       │   ├── start_dwm
+│       │   ├── start_home
+│       │   ├── start_i3
+│       │   ├── start_tmux
+│       │   ├── sway
+│       │   ├── vol
+│       │   └── wpa_supplicant
+│       ├── runit-services
+│       │   └── service
+│       │       └── run
+│       └── wireless
+│           └── network
 ├── wayland
 │   ├── fix_wdisplays.sh
 │   └── setup.txt
 └── xorg
+    ├── .xinitrc
     ├── 30-touchpad.conf
-    └── setup.txt
+    ├── compile_suckless.sh
+    ├── setup.txt
+    └── suckless-conf
+        ├── dmenu-config.h
+        ├── dmenu-config.mk
+        ├── dwm-config.h
+        ├── dwm-config.mk
+        ├── slstatus-config.h
+        ├── slstatus-config.mk
+        ├── st-config.h
+        └── st-config.mk
 ```
 
 `wayland` has scripts and a file with packages to install for sway/wayland.  `xorg` has a touchpad configuration file and a file with packages to install for i3/xorg.  Both window managers may be used side by side with these supporting configuration files if installed at the same time.  `common.txt` are programs chosen that have wayland and xorg compatibility.  Noted exception is kicad.
@@ -108,3 +127,7 @@ Copy all files from `user_files` in to user directory as user.  Alternately, cop
 All files from `root_files` can be copied to `/root` for convenience.  `createswap` will create a `swapfile` at the root of the filesystem and modify `/etc/fstab`.  Modify `doas.conf` for user(s) and copy to `/etc`. Run `fix_pam.sh` to allow `gnome-keyring` to be used on login for users.  `findswap` will print a line useable for `/etc/default/grub` to enable hibernation. `set_default_browser` to fix `sensible-browser` links (will set firefox-esr).
 
 The `samsung_chromebook` folder has files specific to the first gen [Samsung Arm Chromebook, model XE303C12](https://www.samsung.com/us/business/support/owners/product/chromebook-xe303c12/).  i3/xorg is used over sway/wayland for max compatiblity.  `armhf` binaries for `codium` and `nodejs` development are still available, however c/c++ development is not easily available because development headers are unable to be installed..
+
+The second half of setup.txt in xorg should be installed for a [suckless](https://tools.suckless.org/) local installation.  Install the packages with apt, then run `compile_suckless.sh` as user.  This script will clone the dwm, slstatus, dmenu and st repos in to `$HOME/.local/suckless`, compile these projects using clang using the configuration files in `suckless-conf` and install each binary in to `$HOME/local`.  Be sure to copy `.xinitrc-suckless` to the user directory and launch dwm with `start_dwm`.
+
+The mod key is `Alt` for dwm.  Some important shortcuts to start with are `Alt+Shift+Enter` to start st (terminal program), `Alt-Shift-o` to launch Firefox, `Alt-p` to start dmenu (status bar changes to program launcher, start typing to get a list of launchable programs e.g. codium) and finally `Alt-Shift-q` to exit.  Look at `xorg/suckless-conf/dwm-config.h` for other keyboard shortcut combinations.  Modify `$HOME/.local/suckless/dwm/config.h` and recompile (`make clean install`) to add/change keyboard shortcuts.  The same is true for the other suckless programs.  slstatus should be modified if default wifi interface is not `wlp2s0` or to monitor a different battery than `BAT0` and is necessary to modify to read `.bright` in the user home directory.  st should be modified if a different font is preferred over Inconsolata.  dmenu font is set in dwm's `config.h` (default is Liberation Mono in the included config files).

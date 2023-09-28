@@ -44,7 +44,7 @@ MKCONFIG="slstatus-config.mk"
 URL="https://git.sr.ht/~bt/slstatus"
 clone_and_build
 
-
+# st
 DIR="st"
 CONFIG="st-config.h"
 MKCONFIG="st-config.mk"
