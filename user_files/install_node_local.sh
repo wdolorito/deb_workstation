@@ -216,7 +216,7 @@ parse_options() {
   esac
 }
 
-if [ "$SHELL" = "/bin/bash" ]
+if [ "$(basename "$SHELL")" = "bash" ]
 then
   parse_options "$@"
 else
