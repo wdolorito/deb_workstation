@@ -27,26 +27,26 @@ clone_and_build() {
 DIR="dwm"
 CONFIG="dwm-config.h"
 MKCONFIG="dwm-config.mk"
-URL="https://git.sr.ht/~bt/dwm"
+URL="https://git.suckless.org/dwm"
 clone_and_build
 
 # dmenu
 DIR="dmenu"
 CONFIG="dmenu-config.h"
 MKCONFIG="dmenu-config.mk"
-URL="https://git.sr.ht/~bt/dmenu"
+URL="https://git.suckless.org/dmenu"
 clone_and_build
 
 # slstatus
 DIR="slstatus"
 CONFIG="slstatus-config.h"
 MKCONFIG="slstatus-config.mk"
-URL="https://git.sr.ht/~bt/slstatus"
+URL="https://git.suckless.org/slstatus"
 clone_and_build
 
 # st
 DIR="st"
 CONFIG="st-config.h"
 MKCONFIG="st-config.mk"
-URL="https://git.sr.ht/~bt/st"
+URL="https://git.suckless.org/st"
 clone_and_build
