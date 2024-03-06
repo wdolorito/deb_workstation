@@ -4,16 +4,38 @@
 # ~/local/bin/start_tmux
 #
 
-SESSION=main
+run_tmux() {
+  SESSION=main
 
-if ! tmux has-session -t="$SESSION"
-then
-  TMUX="" tmux new-session -d -s "$SESSION"
-fi
+  if ! tmux has-session -t="$SESSION" > /dev/null 2>&1
+  then
+    TMUX="" tmux new-session -d -s "$SESSION"
+  fi
 
-if [ "$TMUX" = "" ]
+  if [ "$TMUX" = "" ]
+  then
+    if [ -z "$1" ]
+    then
+      tmux attach-session -t "$SESSION"
+    else
+      fbterm -- tmux attach-session -t "$SESSION"
+    fi
+  else
+    if [ -z "$1" ]
+    then
+      tmux switch-client -t "$SESSION"
+    else
+      fbterm -- tmux switch-client -t "$SESSION"
+    fi
+  fi
+}
+
+if [ -t 0 ]
 then
-  fbterm -- tmux attach-session -t "$SESSION"
-else
-  fbterm -- tmux switch-client -t "$SESSION"
+  if [ -z "$DISPLAY" ]
+  then
+    run_tmux "use fbterm"
+  else
+    run_tmux
+  fi
 fi

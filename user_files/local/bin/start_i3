@@ -2,12 +2,13 @@
 #
 # ~/local/bin/start_i3
 #
-startx
+export GTK_THEME=Adwaita:dark
+export $(dbus-launch)
 
-# clean up feh
-rm -f ~/.fehbg
+startx
 
 # clean up brightness
 rm -f ~/.bright
 
-start_tmux
+# clean up feh
+rm -f ~/.fehbg
