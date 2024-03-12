@@ -4,7 +4,7 @@
 # ~/local/bin/chromium
 #
 
-CMD="chromium"
+CMD="/usr/bin/chromium"
 FLATPAK="flatpak"
 PKG="org.chromium.Chromium"
 X="$(pidof Xorg)"
