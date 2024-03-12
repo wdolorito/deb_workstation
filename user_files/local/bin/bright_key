@@ -4,16 +4,27 @@
 # ~/local/bin/bright_key
 #
 
+CMD="brightnessctl"
 DEV="smc::kbd_backlight"
-case "$1" in
+
+if [ -z "$(which $CMD)" ]
+then
+  printf "install a package that supplies the \"%s\" utility\n" "$CMD"
+  exit 127
+fi
+
+COMP="$(echo "$1" | tr '[:upper:]' '[:lower:]')"
+
+case "$COMP" in
   "up")
-    brightnessctl -qd $DEV  set +10%
+    $CMD -qd $DEV  set +10%
     ;;
   "down")
-    brightnessctl -qd $DEV set 10%-
+    $CMD -qd $DEV set 10%-
     ;;
   *)
     ;;
 esac
 
-brightnessctl -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "(%)"
+$CMD -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "(%)"
+exit 0
