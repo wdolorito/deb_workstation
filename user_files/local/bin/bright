@@ -4,14 +4,24 @@
 # ~/local/bin/bright
 #
 
-X="$(pidof Xorg)"
+CMD="brightnessctl"
 DEV="acpi_video0"
-case "$1" in
+X="$(pidof Xorg)"
+
+if [ -z "$(which $CMD)" ]
+then
+  printf "install a package that supplies the \"%s\" utility\n" "$CMD"
+  exit 127
+fi
+
+COMP="$(echo "$1" | tr '[:upper:]' '[:lower:]')"
+
+case "$COMP" in
   "up")
-    brightnessctl -qd $DEV  set +5%
+    $CMD -qd $DEV  set +5%
     ;;
   "down")
-    brightnessctl -qd $DEV set 5%-
+    $CMD -qd $DEV set 5%-
     ;;
   *)
     ;;
@@ -19,7 +29,9 @@ esac
 
 if [ -n "$X" ]
 then
-  brightnessctl -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "()" > ~/.bright
+  $CMD -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "()" > ~/.bright
 else
-  brightnessctl -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "(%)"
+  $CMD -d $DEV | sed -n 2p | awk '{print $4}' | tr -d "(%)"
 fi
+
+exit 0
