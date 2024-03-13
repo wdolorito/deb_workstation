@@ -24,6 +24,8 @@ then
   if [ -n "$FLATPAKERRMSG" ]
   then
     printf "%s\n\n" "$FLATPAKERRMSG"
+  else
+    printf "\n"
   fi
   exit 127
 fi
