@@ -4,11 +4,37 @@
 # ~/local/bin/google-chrome
 #
 
+CMD="/usr/bin/google-chrome"
+FLATPAK="flatpak"
+PKG="com.google.Chrome"
 X="$(pidof Xorg)"
+
+if [ -z "$(which $CMD)" ]
+then
+  if [ -n "$(which "$FLATPAK")" ]
+  then
+    if $FLATPAK list | grep "$PKG"
+    then
+      CMD="$FLATPAK --user run $PKG"
+    else
+      FLATPAKERRMSG="or install from flatpak repo with \"$FLATPAK --user install $PKG\""
+    fi
+  fi
+  printf "\ninstall a package that supplies \"%s\"\n" "$CMD"
+  if [ -n "$FLATPAKERRMSG" ]
+  then
+    printf "%s\n\n" "$FLATPAKERRMSG"
+  else
+    printf "\n"
+  fi
+  exit 127
+fi
 
 if [ -n "$X" ]
 then
-  google-chrome-stable "$@"
+  $CMD "$@"
 else
-  google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"
+  $CMD --enable-features=UseOzonePlatform --ozone-platform=wayland  "$@"
 fi
+
+exit 0
