@@ -1,0 +1,34 @@
+#!/bin/sh
+
+#
+# ~/local/bin/firefox
+#
+
+CMD="/usr/bin/firefox"
+FLATPAK="flatpak"
+PKG="org.mozilla.firefox"
+
+if [ -z "$(which $CMD)" ]
+then
+  if [ -n "$(which "$FLATPAK")" ]
+  then
+    if $FLATPAK list | grep "$PKG"
+    then
+      CMD="$FLATPAK --user run $PKG"
+    else
+      FLATPAKERRMSG="or install from flatpak repo with \"$FLATPAK --user install $PKG\""
+    fi
+  fi
+  printf "\ninstall a package that supplies \"%s\"\n" "$CMD"
+  if [ -n "$FLATPAKERRMSG" ]
+  then
+    printf "%s\n\n" "$FLATPAKERRMSG"
+  else
+    printf "\n"
+  fi
+  exit 127
+fi
+
+$CMD "$@"
+
+exit 0
