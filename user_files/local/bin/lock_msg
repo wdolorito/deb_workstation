@@ -1,6 +1,6 @@
 #!/bin/sh
 OSFN="/etc/os-release"
-OSLINE="$(head -n 1 "$OSFN" | tr -d \" | cut -d = -f 2)"
+OSLINE="$(grep PRETTY_NAME "$OSFN" | awk -F "=" '{print $2}' | tr -d \")"
 USER="$(whoami)"
 HOST="$(hostname)"
 USERLINE="$USER"@"$HOST"
