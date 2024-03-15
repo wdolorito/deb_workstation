@@ -1,4 +1,9 @@
 #!/bin/sh
+
+#
+# ~/local/bin/lock_msg
+#
+
 OSFN="/etc/os-release"
 OSLINE="$(grep PRETTY_NAME "$OSFN" | awk -F "=" '{print $2}' | tr -d \")"
 USER="$(whoami)"
