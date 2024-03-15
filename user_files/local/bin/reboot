@@ -4,7 +4,22 @@
 # ~/local/bin/reboot
 #
 
-/sbin/reboot
+CMD="/sbin/reboot"
+DOASFN="/etc/doas.conf"
+DOASCMD="$(grep "$(basename "$0")" "$DOASFN" | awk '{print $7}')"
 
-# for Devuan
-# doas /sbin/reboot
+if [ -n "$DOASCMD" ]
+then
+  doas "$DOASCMD"
+  exit 0
+else
+  if [ -f "$CMD" ]
+  then
+    $CMD
+    exit 0
+  else
+    printf "\n%s does not exist, nor can we run it from %s\n\n" "$CMD" "$DOASFN"
+    exit 127
+  fi
+fi
+
