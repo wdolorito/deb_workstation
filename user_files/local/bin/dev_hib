@@ -1,8 +1,0 @@
-#!/bin/sh
-
-#
-# ~/local/bin/dev_hib
-#
-
-doas /usr/sbin/pm-hibernate
-physlock -dmsp "$LOCK_MSG"

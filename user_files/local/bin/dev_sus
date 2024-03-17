@@ -1,8 +1,0 @@
-#!/bin/sh
-
-#
-# ~/local/bin/dev_sus
-#
-
-doas /usr/sbin/pm-suspend-hybrid
-physlock -dmsp "$LOCK_MSG"

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+#
+# ~/local/bin/hibernate
+#
+
+CMD="systemctl hibernate"
+DOASFN="/etc/doas.conf"
+DOASCMD="$(grep "$(basename "$0")" "$DOASFN" | awk '{print $7}')"
+LOCK="lock_screen"
+
+if [ -n "$DOASCMD" ]
+then
+  doas "$DOASCMD"
+else
+  if ! $CMD
+  then
+    printf "\nunable to run \"%s\"\n\n" "$CMD"
+    exit 127
+  fi
+fi
+
+$LOCK
+exit 0

@@ -1,8 +1,0 @@
-#!/bin/sh
-
-#
-# ~/local/bin/deb_sus
-#
-
-systemctl hybrid-sleep
-physlock -dmsp "$LOCK_MSG"

@@ -1,8 +1,0 @@
-#!/bin/sh
-
-#
-# ~/local/bin/deb_hib
-#
-
-systemctl hibernate
-physlock -dmsp "$LOCK_MSG"
