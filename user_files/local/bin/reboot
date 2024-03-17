@@ -10,12 +10,12 @@ DOASCMD="$(grep "$(basename "$0")" "$DOASFN" | awk '{print $7}')"
 
 if [ -n "$DOASCMD" ]
 then
-  doas "$DOASCMD"
+  doas "$DOASCMD" "$@"
   exit 0
 else
   if [ -f "$CMD" ]
   then
-    $CMD
+    $CMD "$@"
     exit 0
   else
     printf "\n%s does not exist, nor can we run it from %s\n\n" "$CMD" "$DOASFN"
