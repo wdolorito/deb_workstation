@@ -3,7 +3,7 @@
 export CC=clang
 export LDFLAGS=-fuse-ld=lld
 BUILDDIR="$HOME"/.local/suckless
-TOPLEVEL="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+TOPLEVEL="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit 1; pwd -P)"
 if ! [ -d "$BUILDDIR" ]
 then
   mkdir -p "$BUILDDIR"
@@ -18,6 +18,11 @@ clone_and_build() {
   rm -f "$BUILDDIR/$DIR/config.h"
   rm -f "$BUILDDIR/$DIR/config.mk"
   cd "$DIR" || exit
+  if [ -n "$PATCH" ]
+  then
+    curl "$PATCH" -O
+    patch -Np1 -i "$(basename "${PATCH}")"
+  fi
   cp -v "$TOPLEVEL/suckless-conf/$CONFIG" "$BUILDDIR/$DIR/config.h"
   cp -v "$TOPLEVEL/suckless-conf/$MKCONFIG" "$BUILDDIR/$DIR/config.mk"
   make clean install
@@ -49,4 +54,5 @@ DIR="st"
 CONFIG="st-config.h"
 MKCONFIG="st-config.mk"
 URL="https://git.suckless.org/st"
+PATCH="https://st.suckless.org/patches/scrollback/st-scrollback-0.8.5.diff"
 clone_and_build
