@@ -7,19 +7,10 @@
 CMD="/usr/bin/codium"
 FLATPAK="flatpak"
 PKG="com.vscodium.codium"
+FLATPAKERRMSG=""
 X="$(pidof Xorg)"
 
-if [ -z "$(which $CMD)" ]
-then
-  if [ -n "$(which "$FLATPAK")" ]
-  then
-    if $FLATPAK list | grep "$PKG"
-    then
-      CMD="$FLATPAK --user run $PKG"
-    else
-      FLATPAKERRMSG="or install from flatpak repo with \"$FLATPAK --user install $PKG\""
-    fi
-  fi
+do_err() {
   printf "\ninstall a package that supplies \"%s\"\n" "$CMD"
   if [ -n "$FLATPAKERRMSG" ]
   then
@@ -28,13 +19,36 @@ then
     printf "\n"
   fi
   exit 127
-fi
+}
 
-if [ -n "$X" ]
+launch_program() {
+  if [ -n "$X" ]
+  then
+    $CMD "$@"
+  else
+    $CMD --enable-features=UseOzonePlatform --ozone-platform=wayland  "$@"
+  fi
+  exit 0
+}
+
+if [ -z "$(which $CMD)" ]
 then
-  $CMD "$@"
-else
-  $CMD --enable-features=UseOzonePlatform --ozone-platform=wayland  "$@"
+  if [ -n "$(which "$FLATPAK")" ]
+  then
+    if $FLATPAK list | grep "$PKG"
+    then
+      CMD="$FLATPAK run $PKG"
+    else
+      FLATPAKERRMSG="or install from flatpak repo with \"$FLATPAK install $PKG\""
+      do_err
+    fi
+  fi
 fi
 
-exit 0
+if [ "$XDG_SESSION_TYPE" = "tty" ]
+then
+  printf "\nNot in a graphical session\n\n"
+  exit 1
+else
+  launch_program
+fi
