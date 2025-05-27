@@ -15,7 +15,7 @@ brightnessctl <--  usermod -a -G input <user> (also for keyboard backlight ie. m
 
 add if have bluetooth:
 bluez
-pulseaudio-module-bluetooth
+bluez-tools
 
 imv
 fbi
