@@ -6,7 +6,8 @@ wev
 mako-notifier
 wdisplays <-- run fix_wdisplays.sh after install/update
 wob
-qtwayland5
-xwayland
+qt6-wayland
+xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
 
 purge foot suckless-tools sway-backgrounds
