@@ -8,7 +8,7 @@ sakura
 tmux
 fbterm <--  setcap 'cap_sys_tty_config+ep' /usr/bin/fbterm
 
-pulseaudio
+pipewire-audio
 pulseaudio-utils
 pavucontrol
 brightnessctl <--  usermod -a -G input <user> (also for keyboard backlight ie. mbp 5,5)
