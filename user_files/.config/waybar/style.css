@@ -39,7 +39,7 @@ window#waybar.hidden {
     background-color: #eb4d4b;
 }
 
-#clock,
+#custom-clock,
 #battery,
 #cpu,
 #memory,
@@ -67,7 +67,7 @@ window#waybar.hidden {
     margin-right: 0;
 }
 
-#clock {
+#custom-clock {
     background-color: #64727D;
 }
 
