@@ -2,18 +2,18 @@ doas
 neofetch
 physlock
 shellcheck
-pm-utils <-- for devuan suspend and hibernate
 
-sakura
 tmux
-fbterm <--  setcap 'cap_sys_tty_config+ep' /usr/bin/fbterm
+fbterm
+# setcap 'cap_sys_tty_config+ep' /usr/bin/fbterm
 
 pipewire-audio
 pulseaudio-utils
 pavucontrol
-brightnessctl <--  usermod -a -G input <user> (also for keyboard backlight ie. mbp 5,5)
+brightnessctl
+# usermod -a -G input <user> (also for keyboard backlight ie. mbp 5,5)
 
-add if have bluetooth:
+# bluetooth:
 bluez
 bluez-tools
 
@@ -48,5 +48,18 @@ fonts-recommended
 fonts-inconsolata
 fonts-font-awesome
 
+sway
+swayidle
+wofi
+waybar
+wev
+mako-notifier
+wdisplays <-- run fix_wdisplays.sh after install/update
+wob
+qt6-wayland
+xdg-desktop-portal-wlr
+xdg-desktop-portal-gtk
+
+purge suckless-tools sway-backgrounds
 purge lxc-templates
 dpkg-reconfigure tzdata
