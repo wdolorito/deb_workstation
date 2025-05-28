@@ -26,8 +26,10 @@ brasero
 
 p7zip-full
 
-contrib non-free packages:
-libdvd-pkg <--  dkg-reconfigure libdvd-pkg
+# contrib non-free packages:
+libdvd-pkg
+# dkg-reconfigure libdvd-pkg
+
 p7zip-rar
 
 git
@@ -35,31 +37,39 @@ git
 gnome-disk-utility
 testdisk
 cgpt
-command-not-found <-- update-command-not-found
-apt-file <-- apt-file update
+
+command-not-found
+# update-command-not-found
+apt-file
+# apt-file update
 
 acl
-lxc <-- cd <user> && setfacl -m u:<user subuid>:x . .local .local/share
-virt-manager <-- usermod -a -G libvirt <user> (to use virt-manager gui)
+lxc
+# cd <user> && setfacl -m u:<user subuid>:x . .local .local/share
+virt-manager
+# usermod -a -G libvirt <user> (to use virt-manager gui)
 qemu-user-static
-remmina-plugin-vnc <-- install if !install virt-manager (pulls remote-viewer)
 
 fonts-recommended
 fonts-inconsolata
 fonts-font-awesome
 
 sway
+wayfire
+
+grim
+mako-notifier
+qt6-wayland
+slurp
 swayidle
+wlogout
 wofi
 waybar
 wev
-mako-notifier
-wdisplays <-- run fix_wdisplays.sh after install/update
+wdisplays
 wob
-qt6-wayland
 xdg-desktop-portal-wlr
 xdg-desktop-portal-gtk
 
-purge suckless-tools sway-backgrounds
-purge lxc-templates
+apt purge suckless-tools sway-backgrounds lxc-templates
 dpkg-reconfigure tzdata
