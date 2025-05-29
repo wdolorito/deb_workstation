@@ -1,0 +1,59 @@
+#!/bin/sh
+
+#
+# ~/local/bin/wayfire
+#
+
+BACKGROUND="$HOME/Pictures/keith-misner-h0Vxgz5tyXA-unsplash.jpg"
+OBSOCK="$(make_ob_sock)"
+GTK_THEME="Adwaita:dark"
+QT_QPA_PLATFORM="wayland"
+MOZ_ENABLE_WAYLAND=1
+
+run_session() {
+	export OBSOCK
+	export GTK_THEME
+	export QT_QPA_PLATFORM
+	export MOZ_ENABLE_WAYLAND
+	bright 30 false
+	/usr/bin/wayfire -c "$HOME"/.config/wayfire/wayfire.ini
+}
+
+reset_env() {
+	make_ob_sock destroy
+	do_ob clean
+	unset OBSOCK
+	unset GTK_THEME
+	unset QT_QPA_PLATFORM
+	unset MOZ_ENABLE_WAYLAND
+	clear
+}
+
+set_background() {
+	swaybg -i "$BACKGROUND"
+}
+
+start_bar() {
+	waybar -c "$HOME"/.config/waybar/config-wayfire
+}
+
+set_idle() {
+	swayidle -w \
+		timeout 300 'lock_screen'
+}
+
+case "$1" in
+	idle )
+		set_idle
+		;;
+	background )
+		set_background
+		;;
+	bar )
+		start_bar
+		;;
+	* )
+		run_session
+		reset_env
+		;;
+esac

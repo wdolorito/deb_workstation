@@ -1,8 +1,12 @@
 {
 	"height": 30,
-	"modules-left": ["sway/workspaces"],
-	"modules-center": ["sway/window"],
+	"modules-left": ["wlr/taskbar"],
 	"modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "backlight", "battery", "custom/clock"],
+	"wlr/taskbar": {
+		"format": "{icon}",
+		"tooltip": "{title}",
+		"on-click": "minimize-raise"
+	},
 	"backlight": {
 		"device": "acpi_video0",
 		"format": "{percent}% {icon}",
