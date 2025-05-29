@@ -1,0 +1,41 @@
+#!/bin/sh
+
+#
+# ~/local/bin/screenshot
+#
+
+GRIM=""
+SLURP=""
+SSDIR=""
+
+if [ "$XDG_SESSION_TYPE" = "tty" ]
+then
+	exit 1
+fi
+
+GRIM="$(which grim 2>/dev/null)"
+
+if [ -z "$GRIM" ]
+then
+	exit 127
+fi
+
+SSDIR="$HOME/Pictures/screenshot"
+
+if ! [ -d "$SSDIR" ]
+then
+	mkdir -p "$SSDIR"
+fi
+
+if [ -z "$1" ]
+then
+	$GRIM "$SSDIR/screen-$(date '+%F_%T').png"
+else
+	SLURP="$(which slurp 2>/dev/null)"
+	if [ -z "$SLURP" ]
+	then
+		exit 127
+	fi
+
+	$SLURP | $GRIM -g - "$SSDIR/crop-$(date '+%F_%T').png"
+fi
