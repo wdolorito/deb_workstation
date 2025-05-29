@@ -1,10 +1,10 @@
 #!/bin/sh
 
 #
-# ~/local/bin/wayfire
+# ~/local/bin/start_wayfire
 #
 
-BACKGROUND="$HOME/Pictures/keith-misner-h0Vxgz5tyXA-unsplash.jpg"
+BACKGROUND="$HOME/Pictures/<image>"
 OBSOCK="$(make_ob_sock)"
 GTK_THEME="Adwaita:dark"
 QT_QPA_PLATFORM="wayland"
