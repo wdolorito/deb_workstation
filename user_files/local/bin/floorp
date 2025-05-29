@@ -1,13 +1,13 @@
 #!/bin/sh
 
 #
-# ~/local/bin/firefox
+# ~/local/bin/floorp
 #
 
-CMD="/usr/bin/firefox"
+CMD="/usr/bin/floorp"
 FLATPAK="$(which flatpak 2>/dev/null)"
 FLATPAKERRMSG=""
-PKG="org.mozilla.firefox"
+PKG="one.ablaze.floorp"
 
 do_error() {
 	printf "\ninstall a package that supplies \"%s\"\n" "$CMD"
