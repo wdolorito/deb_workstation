@@ -1,7 +1,0 @@
-#!/bin/sh
-
-#
-# ~/local/bin/wpa_supplicant
-#
-
-doas /sbin/wpa_supplicant "$@"
