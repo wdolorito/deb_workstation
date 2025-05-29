@@ -17,3 +17,5 @@ unset GTK_THEME
 unset MOZ_ENABLE_WAYLAND
 unset OBSOCK
 unset QT_QPA_PLATFORM
+
+clear
