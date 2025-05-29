@@ -4,9 +4,16 @@
 # ~/local/bin/sway
 #
 
-export QT_QPA_PLATFORM=wayland
-export MOZ_ENABLE_WAYLAND=1
+export GTK_THEME="Adwaita:dark"
+export MOZ_ENABLE_WAYLAND="1"
+export OBSOCK="$(make_ob_sock)"
+export QT_QPA_PLATFORM="wayland"
 
+bright 30 false
 /usr/bin/sway
 
-start_tmux
+make_ob_sock destroy
+unset GTK_THEME
+unset MOZ_ENABLE_WAYLAND
+unset OBSOCK
+unset QT_QPA_PLATFORM
