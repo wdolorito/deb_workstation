@@ -4,4 +4,11 @@
 # ~/local/bin/pchromium
 #
 
-chromium --incognito "$@"
+CMD="$(which chromium 2>/dev/null)"
+
+if [ -z "$CMD" ]
+then
+    exit 127
+fi
+
+$CMD --incognito "$@"
