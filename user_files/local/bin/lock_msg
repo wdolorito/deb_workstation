@@ -5,9 +5,9 @@
 #
 
 OSFN="/etc/os-release"
-OSLINE="$(grep PRETTY_NAME "$OSFN" | awk -F "=" '{print $2}' | tr -d \")"
-USER="$(whoami)"
-HOST="$(hostname)"
+OSLINE="$(head -n 1 "$OSFN" | awk -F "=" '{print $2}' | tr -d \")"
+USER="$(whoami 2>/dev/null)"
+HOST="$(hostname 2>/dev/null)"
 USERLINE="$USER"@"$HOST"
 LOCKMSG="Unlock Me"
 
