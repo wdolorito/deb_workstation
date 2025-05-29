@@ -4,22 +4,18 @@
 # ~/local/bin/reboot
 #
 
-CMD="/sbin/reboot"
-DOASFN="/etc/doas.conf"
-DOASCMD="$(grep "$(basename "$0")" "$DOASFN" | awk '{print $7}')"
+CMD=""
+SYSTEMCTL="$(which systemctl 2>/dev/null)"
 
-if [ -n "$DOASCMD" ]
+if [ -z "$SYSTEMCTL" ]
 then
-  doas "$DOASCMD" "$@"
-  exit 0
-else
-  if [ -f "$CMD" ]
-  then
-    $CMD "$@"
-    exit 0
-  else
-    printf "\n%s does not exist, nor can we run it from %s\n\n" "$CMD" "$DOASFN"
-    exit 127
-  fi
+	exit 127
 fi
 
+CMD="$SYSTEMCTL reboot"
+
+if ! $CMD
+then
+	printf "\nunable to run \"%s\"\n\n" "$CMD"
+	exit 127
+fi

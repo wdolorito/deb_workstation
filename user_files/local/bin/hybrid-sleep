@@ -4,21 +4,21 @@
 # ~/local/bin/hybrid-sleep
 #
 
-CMD="systemctl hybrid-sleep"
-DOASFN="/etc/doas.conf"
-DOASCMD="$(grep "$(basename "$0")" "$DOASFN" | awk '{print $7}')"
+CMD=""
 LOCK="lock_screen"
+SYSTEMCTL="$(which systemctl 2>/dev/null)"
 
-if [ -n "$DOASCMD" ]
+if [ -z "$SYSTEMCTL" ]
 then
-  doas "$DOASCMD"
-else
-  if ! $CMD
-  then
-    printf "\nunable to run \"%s\"\n\n" "$CMD"
-    exit 127
-  fi
+	exit 127
+fi
+
+CMD="$SYSTEMCTL hybrid-sleep"
+
+if ! $CMD
+then
+	printf "\nunable to run \"%s\"\n\n" "$CMD"
+	exit 127
 fi
 
 $LOCK
-exit 0
