@@ -1,0 +1,15 @@
++++ .profile	2025-05-28 07:16:22.034055514 -0600
+@@ -25,3 +25,13 @@
+ if [ -d "$HOME/.local/bin" ] ; then
+     PATH="$HOME/.local/bin:$PATH"
+ fi
++
++# set PATH so it includes user's local bin if it exists
++if [ -d "$HOME/local/bin" ]
++then
++	PATH="$HOME/local/bin:$PATH"
++fi
++
++# needed for lxc
++export DOWNLOAD_KEYSERVER=keyserver.ubuntu.com
++export NEXT_TELEMETRY_DISABLED=1

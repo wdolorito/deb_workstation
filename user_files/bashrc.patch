@@ -1,0 +1,18 @@
++++ .bashrc	2025-05-28 08:57:05.164540403 -0600
+@@ -111,3 +111,16 @@
+     . /etc/bash_completion
+   fi
+ fi
++
++# ssh-agent
++if [ -z "$SSH_AUTH_SOCK" ] && ! [ "$TERM_PROGRAM" = "vscode" ]
++then
++	export SSH_AUTH_SOCK="$HOME"/.ssh/ssh-agent.socket
++	export SSH_ASKPASS_REQUIRE="never"
++fi
++"$HOME"/.ssh/add_ssh_keys
++
++if [ "$TERM" = "linux" ]
++then
++        start_tmux
++fi
