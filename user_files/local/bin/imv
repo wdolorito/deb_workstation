@@ -9,18 +9,18 @@ SEEN="0"
 
 if [ -n "$X" ]
 then
-  imv-x11 "$@"
-  SEEN="1"
+	imv-x11 "$@"
+	SEEN="1"
 else
-  if [ -n "$DISPLAY" ]
-  then
-    imv-wayland "$@"
-    SEEN="1"
-  fi
+	if [ -n "$DISPLAY" ]
+	then
+		imv-wayland "$@"
+		SEEN="1"
+	fi
 fi
 
 if [ "$SEEN" -eq 0 ]
 then
-  printf "\nThis command only works within a GUI.\n"
-  printf "Or try 'fbi %s'\n\n" "$1"
+	printf "\nThis command only works within a GUI.\n\n"
+	exit 1
 fi
