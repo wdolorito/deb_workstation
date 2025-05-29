@@ -40,7 +40,6 @@ case "$COMP" in
 	"on" )
 		$CMD -qrd "$DEV"
 		;;
-		
 	[0-9]* )
 		$CMD -qd "$DEV" set "$COMP"%
 		;;
