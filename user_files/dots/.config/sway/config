@@ -78,6 +78,10 @@ bindsym $mod+Shift+d exec wdisplays
 bindsym Control+Space exec makoctl dismiss
 bindsym Control+Shift+Space exec makoctl dismiss --all
 
+# Screenshot
+bindsym $mod+Print exec screenshot
+bindsym $mod+Shift+Print exec screenshot crop
+
 # Reload the configuration file
 bindsym $mod+Shift+c reload
 

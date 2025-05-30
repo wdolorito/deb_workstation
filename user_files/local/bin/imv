@@ -12,7 +12,7 @@ then
 	imv-x11 "$@"
 	SEEN="1"
 else
-	if [ -n "$DISPLAY" ]
+	if env | grep -q "DISPLAY"
 	then
 		imv-wayland "$@"
 		SEEN="1"
