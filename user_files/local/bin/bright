@@ -17,6 +17,12 @@ fi
 
 DEV="$($CMD | tr -d \' | grep backlight | awk '{print $2}')"
 
+if [ -z "$DEV" ]
+then
+	printf "this system doesn't have a display backlight\n"
+	exit 1
+fi
+
 if [ -n "$2" ]
 then
 	if [ "$2" = "false" ]
