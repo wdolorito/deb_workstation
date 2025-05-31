@@ -61,6 +61,7 @@ wayfire
 
 foot-themes
 grim
+libnotify-bin
 mako-notifier
 qt6-wayland
 slurp
