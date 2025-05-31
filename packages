@@ -51,6 +51,7 @@ virt-manager
 # usermod -a -G libvirt <user> (to use virt-manager gui)
 qemu-user-static
 
+flatpak
 fonts-recommended
 fonts-inconsolata
 fonts-font-awesome
