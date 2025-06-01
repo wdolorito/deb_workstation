@@ -23,7 +23,7 @@ do_error() {
 }
 
 launch_program() {
-	if ! $CMD --enable-features=UseOzonePlatform --ozone-platform=wayland "$1" 2>/dev/null
+	if ! $CMD --enable-features=UseOzonePlatform --ozone-platform=wayland "$@" 2>/dev/null
 	then
 		do_error
 	fi
@@ -47,5 +47,5 @@ then
 	printf "\nNot in a graphical session\n\n"
 	exit 1
 else
-	launch_program "$1"
+	launch_program "$@"
 fi

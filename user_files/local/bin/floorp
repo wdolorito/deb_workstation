@@ -23,7 +23,7 @@ do_error() {
 }
 
 launch_program() {
-	if ! $CMD "$1" 2>/dev/null
+	if ! $CMD "$@" 2>/dev/null
 	then
 		do_error
 	fi

@@ -1,13 +1,13 @@
 #!/bin/sh
 
 #
-# ~/local/bin/firefox
+# ~/local/bin/opera
 #
 
-CMD="/usr/bin/firefox"
+CMD="/usr/bin/opera"
 FLATPAK="$(which flatpak 2>/dev/null)"
 FLATPAKERRMSG=""
-PKG="org.mozilla.firefox"
+PKG="com.opera.Opera"
 
 do_error() {
 	printf "\ninstall a package that supplies \"%s\"\n" "$CMD"
@@ -23,7 +23,7 @@ do_error() {
 }
 
 launch_program() {
-	if ! $CMD "$@" 2>/dev/null
+	if ! $CMD --enable-features=UseOzonePlatform --ozone-platform=wayland "$@" 2>/dev/null
 	then
 		do_error
 	fi
