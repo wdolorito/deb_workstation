@@ -12,3 +12,9 @@ for app in $(cat flatpak_apps.txt) ; do flatpak install flathub -y --noninteract
 
 flatpak --user override --env="FLATPAK_ENABLE_SDK_EXT=llvm20,node22,openjdk21" com.vscodium.codium
 ```
+* patch bash + profile dots
+```
+cd "$HOME"
+
+for patch in <path to repo>/user_files/*.patch ; do patch < "$patch" ; done
+```
