@@ -4,6 +4,9 @@
 # notifications
 exec mako
 
+# on screen keyboard
+exec start_osk reset
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 

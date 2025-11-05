@@ -1,0 +1,54 @@
+#!/bin/sh
+
+#
+# ~/local/bin/start_osk
+#
+
+CMD="wvkbd-mobintl"
+OSK="$(which "$CMD")"
+PIDFN="$XDG_RUNTIME_DIR/osk_pid"
+
+if [ -z "$OSK" ]
+then
+	printf "\ninstall a package that supplies \"%s\"\n" "$CMD"
+	exit 127
+fi
+
+start_osk() {
+	if ! [ -f "$PIDFN" ]
+	then
+		$OSK --hidden &
+		echo "$!" > "$PIDFN"
+	fi
+}
+
+toggle_osk() {
+	if [ -f "$PIDFN" ]
+	then
+		kill -RTMIN "$(cat "$PIDFN")"
+	fi
+}
+
+clean_osk() {
+	if [ -f "$PIDFN" ]
+	then
+		kill -KILL "$(cat "$PIDFN")"
+	fi
+	rm -f "$PIDFN"
+}
+
+case "$1" in
+	toggle )
+		toggle_osk
+		;;
+	clean )
+		clean_osk
+		;;
+	reset )
+		clean_osk
+		start_osk
+		;;
+	* )
+		start_osk
+		;;
+esac
