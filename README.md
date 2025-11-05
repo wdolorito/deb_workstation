@@ -10,7 +10,7 @@ flatpak --user remote-add --if-not-exists flathub-beta https://flathub.org/beta-
 
 for app in $(cat flatpak_apps.txt) ; do flatpak install flathub -y --noninteractive "$app" ; done
 
-flatpak --user override --env="FLATPAK_ENABLE_SDK_EXT=llvm20,node22,openjdk21" com.vscodium.codium
+flatpak --user override --env="FLATPAK_ENABLE_SDK_EXT=llvm20,node24,openjdk21" com.vscodium.codium
 ```
 * patch bash + profile dots
 ```

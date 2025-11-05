@@ -9,7 +9,7 @@ one.ablaze.floorp
 org.filezillaproject.Filezilla
 org.freecad.FreeCAD
 org.freedesktop.Sdk.Extension.llvm20
-org.freedesktop.Sdk.Extension.node22
+org.freedesktop.Sdk.Extension.node24
 org.freedesktop.Sdk.Extension.openjdk21
 org.geany.Geany
 org.gimp.GIMP
