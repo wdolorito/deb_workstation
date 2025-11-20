@@ -18,3 +18,7 @@ cd "$HOME"
 
 for patch in <path to repo>/user_files/*.patch ; do patch < "$patch" ; done
 ```
+* dark mode
+```
+gsettings org.gnome.desktop.interface color-scheme 'prefer-dark'
+```
