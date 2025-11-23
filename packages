@@ -64,7 +64,6 @@ grim
 libnotify-bin
 mako-notifier
 libglib2.0-bin
-qt6-wayland
 slurp
 swayidle
 wlogout
