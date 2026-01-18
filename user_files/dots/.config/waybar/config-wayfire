@@ -1,70 +1,70 @@
 {
-	"height": 30,
-	"modules-left": ["wlr/taskbar"],
-	"modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "backlight", "battery", "custom/clock"],
-	"wlr/taskbar": {
-		"format": "{icon}",
-		"tooltip": "{title}",
-		"on-click": "minimize-raise"
-	},
-	"backlight": {
-		"device": "acpi_video0",
-		"format": "{percent}% {icon}",
-		"format-icons":  [" ", " "]
-	},
-	"battery": {
-		"states": {
-			"good": 95,
-			"warning": 30,
-			"critical": 15
-		},
-		"format": "{capacity}% {icon}",
-		"format-charging": "{capacity}% 🗲 ",
-		"format-plugged": "{capacity}%  ",
-		"format-alt": "{time} {icon}",
-		"format-icons": [" ", " ", " ", " ", " "]
-	},
-	"custom/clock": {
-		"exec": "date +'%a %d %B %Y %H:%M %Z'",
-		"interval": 1
-	},
-	"cpu": {
-		"format": "{usage}%  ",
-		"tooltip": false
-	},
-	"idle_inhibitor": {
-		"format": "{icon}",
-		"format-icons": {
-			"activated": " ",
-			"deactivated": " "
-		}
-	},
-	"memory": {
-		"format": "{}%  "
-	},
-	"network": {
-		"interface": "wlan0",
-		"format-wifi": "{essid} ({signalStrength}%)  ",
-		"format-linked": "{ifname} (No IP) ✘ ",
-		"format-disconnected": "Disconnected ⚠ ",
-		"format-alt": "{ifname}: {ipaddr}/{cidr}"
-	},
-	"pulseaudio": {
-		"format": "{volume}% {icon} {format_source}",
-		"format-bluetooth": "{volume}% {icon} {format_source}",
-		"format-bluetooth-muted": " {icon} {format_source}",
-		"format-muted": "✘ {format_source}",
-		"format-source": "{volume}%  ",
-		"format-source-muted": " ",
-		"format-icons": {
-			"headphone": " ",
-			"hands-free": " ",
-			"headset": " ",
-			"phone": " ",
-			"portable": " ",
-			"car": " ",
-			"default": [" ", " ", " "]
-		},
-		"on-click": "pavucontrol"
-	}
+    "height": 30,
+    "modules-left": ["wlr/taskbar"],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "backlight", "battery", "custom/clock"],
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "tooltip": "{title}",
+        "on-click": "minimize-raise"
+    },
+    "backlight": {
+        "device": "acpi_video0",
+        "format": "{percent}% {icon}",
+        "format-icons":  [" ", " "]
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% 🗲 ",
+        "format-plugged": "{capacity}%  ",
+        "format-alt": "{time} {icon}",
+        "format-icons": [" ", " ", " ", " ", " "]
+    },
+    "custom/clock": {
+        "exec": "date +'%a %d %B %Y %H:%M %Z'",
+        "interval": 1
+    },
+    "cpu": {
+        "format": "{usage}%  ",
+        "tooltip": false
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": " ",
+            "deactivated": " "
+        }
+    },
+    "memory": {
+        "format": "{}%  "
+    },
+    "network": {
+        "interface": "wlan0",
+        "format-wifi": "{essid} ({signalStrength}%)  ",
+        "format-linked": "{ifname} (No IP) ✘ ",
+        "format-disconnected": "Disconnected ⚠ ",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": "✘ {format_source}",
+        "format-source": "{volume}%  ",
+        "format-source-muted": " ",
+        "format-icons": {
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": [" ", " ", " "]
+        },
+        "on-click": "pavucontrol"
+    }
 }
