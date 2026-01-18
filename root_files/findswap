@@ -1,4 +1,9 @@
 #!/bin/sh
+
+#
+# findswap
+#
+
 UUID=$(findmnt -no UUID -T /swapfile)
 OFFSET=$(filefrag -v /swapfile | sed -n 4p | awk '{print $4}' | tr -d .)
 
