@@ -3,6 +3,7 @@ iwd
 fastfetch
 physlock
 shellcheck
+mksh
 
 tmux
 fbterm
