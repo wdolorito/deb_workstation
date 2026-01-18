@@ -9,13 +9,13 @@ SYSTEMCTL="$(which systemctl 2>/dev/null)"
 
 if [ -z "$SYSTEMCTL" ]
 then
-	exit 127
+    exit 127
 fi
 
 CMD="$SYSTEMCTL poweroff"
 
 if ! $CMD
 then
-	printf "\nunable to run \"%s\"\n\n" "$CMD"
-	exit 127
+    printf "\nunable to run \"%s\"\n\n" "$CMD"
+    exit 127
 fi

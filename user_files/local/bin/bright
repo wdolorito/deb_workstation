@@ -11,53 +11,53 @@ DOOB=1
 
 if [ -z "$CMD" ]
 then
-	printf "install a package that supplies the brightnessctl utility\n"
-	exit 127
+    printf "install a package that supplies the brightnessctl utility\n"
+    exit 127
 fi
 
 DEV="$($CMD | tr -d \' | grep backlight | awk '{print $2}')"
 
 if [ -z "$DEV" ]
 then
-	printf "this system doesn't have a display backlight\n"
-	exit 1
+    printf "this system doesn't have a display backlight\n"
+    exit 1
 fi
 
 if [ -n "$2" ]
 then
-	if [ "$2" = "false" ]
-	then
-		DOOB=0
-	fi
+    if [ "$2" = "false" ]
+    then
+        DOOB=0
+    fi
 fi
 
 COMP="$(echo "$1" | tr '[:upper:]' '[:lower:]')"
 case "$COMP" in
-	"up" )
-		$CMD -qd "$DEV"  set +5%
-		;;
-	"down" )
-		$CMD -qd "$DEV" set 5%-
-		;;
-	"off" )
-		$CMD -qsd "$DEV"
-		$CMD -qd "$DEV" set 0%
-		;;
-	"on" )
-		$CMD -qrd "$DEV"
-		;;
-	[0-9]* )
-		$CMD -qd "$DEV" set "$COMP"%
-		;;
-	* )
-		;;
+    "up" )
+        $CMD -qd "$DEV"  set +5%
+        ;;
+    "down" )
+        $CMD -qd "$DEV" set 5%-
+        ;;
+    "off" )
+        $CMD -qsd "$DEV"
+        $CMD -qd "$DEV" set 0%
+        ;;
+    "on" )
+        $CMD -qrd "$DEV"
+        ;;
+    [0-9]* )
+        $CMD -qd "$DEV" set "$COMP"%
+        ;;
+    * )
+        ;;
 esac
 
 DISPVAL="$($CMD -d "$DEV" | sed -n 2p | awk '{print $4}' | tr -d '()')"
 if [ "$DOOB" -eq 1 ]
 then
-	OBVAL="$(echo "$DISPVAL" | tr -d '(%)')"
-	do_ob "$OBVAL"
+    OBVAL="$(echo "$DISPVAL" | tr -d '(%)')"
+    do_ob "$OBVAL"
 else
-	echo "$DISPVAL"
+    echo "$DISPVAL"
 fi
