@@ -6,7 +6,8 @@
 
 export GTK_THEME="Adwaita:dark"
 export MOZ_ENABLE_WAYLAND="1"
-export OBSOCK="$(make_ob_sock)"
+OBSOCK="$(make_ob_sock)"
+export OBSOCK
 export QT_QPA_PLATFORM="wayland"
 
 bright 30 false
