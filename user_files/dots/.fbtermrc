@@ -3,7 +3,6 @@
 # Lines starting with '#' are ignored.
 # Note that end-of-line comments are NOT supported, comments must be on a line of their own.
 
-
 # font family names/pixelsize used by fbterm, multiple font family names must be seperated by ','
 # and using a fixed width font as the first is strongly recommended
 font-names=mono
