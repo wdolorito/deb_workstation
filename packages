@@ -67,6 +67,7 @@ mako-notifier
 libglib2.0-bin
 slurp
 swayidle
+swaysome
 wlogout
 wofi
 waybar
@@ -76,6 +77,7 @@ wob
 wvkbd
 xdg-desktop-portal-wlr
 xdg-desktop-portal-gtk
+xwayland
 
 apt purge suckless-tools sway-backgrounds lxc-templates
 dpkg-reconfigure tzdata
