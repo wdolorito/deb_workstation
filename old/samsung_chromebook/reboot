@@ -1,7 +1,0 @@
-#!/bin/sh
-
-#
-# ~/local/bin/reboot
-#
-
-doas /sbin/reboot "$@"

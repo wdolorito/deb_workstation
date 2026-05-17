@@ -1,3 +1,0 @@
-#!/bin/sh
-update-alternatives --set gnome-www-browser /usr/bin/firefox-esr
-update-alternatives --set x-www-browser /usr/bin/firefox-esr
