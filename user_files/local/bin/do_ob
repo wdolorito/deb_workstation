@@ -29,12 +29,10 @@ do_error() {
 clean_up() {
     kill -TERM "$(cat "$TMPPIDFN")"
     rm -f "$TMPPIDFN"
-    exit 0
 }
 
 final_clean() {
     rm -rf "$OBDIR"
-    exit 0
 }
 
 do_tail() {
@@ -66,7 +64,7 @@ fi
 
 if [ -z "$OB" ]
 then
-    do_error "\nwob not installed\n\n" 127
+    do_error "\nwob not available\n\n" 127
 fi
 
 if is_input_int "$1"
