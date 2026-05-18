@@ -11,32 +11,32 @@ QT_QPA_PLATFORM="wayland"
 SWAY="$(which sway 2>/dev/null)"
 
 launch() {
-    export GTK_THEME
-    export MOZ_ENABLE_WAYLAND
-    export OBSOCK
-    export QT_QPA_PLATFORM
+	export GTK_THEME
+	export MOZ_ENABLE_WAYLAND
+	export OBSOCK
+	export QT_QPA_PLATFORM
 
-    bright 30 false 2>/dev/null
-    cd "$HOME" || exit
-    $SWAY
+	bright 30 false 2>/dev/null
+	cd "$HOME" || exit
+	$SWAY
 }
 
 clean() {
-    make_ob_sock destroy 2>/dev/null
-    do_ob clean 2>/dev/null
-    unset GTK_THEME
-    unset MOZ_ENABLE_WAYLAND
-    unset OBSOCK
-    unset QT_QPA_PLATFORM
-    start_osk clean 2>/dev/null
-    clear
+	make_ob_sock destroy 2>/dev/null
+	do_ob clean 2>/dev/null
+	unset GTK_THEME
+	unset MOZ_ENABLE_WAYLAND
+	unset OBSOCK
+	unset QT_QPA_PLATFORM
+	start_osk clean 2>/dev/null
+	clear
 }
 
 if [ -n "$SWAY" ]
 then
-    launch
-    clean
+	launch
+	clean
 else
-    echo "sway command not available."
-    exit 127
+	echo "sway command not available."
+	exit 127
 fi
