@@ -5,45 +5,47 @@
 #
 
 PACTL="$(which pactl 2>/dev/null)"
+
 if [ -z "$PACTL" ]
 then
-    printf "install a package that supplies the pactl utility\n"
-    exit 127
+	echo "pactl command not available."
+	exit 127
 fi
 
 CURR="$($PACTL get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%')"
 DISPVAL="0"
 
 case "$1" in
-    "up" )
-        if [ "$CURR" -lt 96 ]
-        then
-            $PACTL set-sink-volume @DEFAULT_SINK@ +5%
-        fi
-        ;;
-    "down" )
-        $PACTL set-sink-volume @DEFAULT_SINK@ -5%
-        ;;
-    "mute" )
-        $PACTL set-sink-mute @DEFAULT_SINK@ toggle
-        ;;
-    "mic" )
-        $PACTL set-source-mute @DEFAULT_SOURCE@ toggle
-        ;;
-    * )
-        ;;
+	"up" )
+		if [ "$CURR" -lt 96 ]
+		then
+			$PACTL set-sink-volume @DEFAULT_SINK@ +5%
+		fi
+		;;
+	"down" )
+		$PACTL set-sink-volume @DEFAULT_SINK@ -5%
+		;;
+	"mute" )
+		$PACTL set-sink-mute @DEFAULT_SINK@ toggle
+		;;
+	"mic" )
+		$PACTL set-source-mute @DEFAULT_SOURCE@ toggle
+		exit
+		;;
+	* )
+		;;
 esac
 
 MUTE="$($PACTL get-sink-mute @DEFAULT_SINK@ |  awk '{print $2}')"
 
 if [ "$MUTE" = "no" ]
 then
-    DISPVAL="$($PACTL get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%')"
+	DISPVAL="$($PACTL get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | tr -d '%')"
 fi
 
 if [ -p "$OBSOCK" ]
 then
-    do_ob "$DISPVAL"
+	do_ob "$DISPVAL"
 else
-    echo "$DISPVAL"
+	echo "$DISPVAL"
 fi
