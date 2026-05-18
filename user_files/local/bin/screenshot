@@ -4,38 +4,37 @@
 # ~/local/bin/screenshot
 #
 
-GRIM=""
-SLURP=""
-SSDIR=""
-
-if [ "$XDG_SESSION_TYPE" = "tty" ]
-then
-    exit 1
-fi
-
 GRIM="$(which grim 2>/dev/null)"
-
-if [ -z "$GRIM" ]
-then
-    exit 127
-fi
-
+SLURP="$(which slurp 2>/dev/null)"
 SSDIR="$HOME/Pictures/screenshot"
 
-if ! [ -d "$SSDIR" ]
+if [ "$XDG_SESSION_TYPE" = "tty" ] || [ -z "$XDG_SESSION_TYPE" ]
 then
-    mkdir -p "$SSDIR"
+	echo "Not in a graphical session."
+	exit 1
 fi
 
-if [ -z "$1" ]
-then
-    $GRIM "$SSDIR/screen-$(date '+%F_%T').png"
-else
-    SLURP="$(which slurp 2>/dev/null)"
-    if [ -z "$SLURP" ]
-    then
-        exit 127
-    fi
 
-    $SLURP | $GRIM -g - "$SSDIR/crop-$(date '+%F_%T').png"
+if [ -n "$GRIM" ]
+then
+	if ! [ -d "$SSDIR" ]
+	then
+		mkdir -p "$SSDIR"
+	fi
+
+	if [ -z "$1" ]
+	then
+		$GRIM "$SSDIR/screen-$(date '+%F_%T').png"
+	else
+		if [ -z "$SLURP" ]
+		then
+			echo "slurp command not available."
+			exit 127
+		fi
+
+		$SLURP | $GRIM -g - "$SSDIR/crop-$(date '+%F_%T').png"
+	fi
+else
+	echo "grim command not available."
+	exit 127
 fi
