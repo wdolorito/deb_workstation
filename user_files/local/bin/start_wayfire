@@ -5,55 +5,62 @@
 #
 
 BACKGROUND="$HOME/Pictures/<image>"
-OBSOCK="$(make_ob_sock)"
+OBSOCK="$(make_ob_sock 2>/dev/null)"
 GTK_THEME="Adwaita:dark"
 QT_QPA_PLATFORM="wayland"
 MOZ_ENABLE_WAYLAND=1
+WAYFIRE="$(which wayfire 2>/dev/null)"
 
 run_session() {
-    export OBSOCK
-    export GTK_THEME
-    export QT_QPA_PLATFORM
-    export MOZ_ENABLE_WAYLAND
-    bright 30 false
-    /usr/bin/wayfire -c "$HOME"/.config/wayfire/wayfire.ini
+	export OBSOCK
+	export GTK_THEME
+	export QT_QPA_PLATFORM
+	export MOZ_ENABLE_WAYLAND
+	bright 30 false 2>/dev/null
+	$WAYFIRE -c "$HOME"/.config/wayfire/wayfire.ini
 }
 
 reset_env() {
-    make_ob_sock destroy
-    do_ob clean
-    unset OBSOCK
-    unset GTK_THEME
-    unset QT_QPA_PLATFORM
-    unset MOZ_ENABLE_WAYLAND
-    clear
+	make_ob_sock destroy 2>/dev/null
+	do_ob clean 2>/dev/null
+	unset OBSOCK
+	unset GTK_THEME
+	unset QT_QPA_PLATFORM
+	unset MOZ_ENABLE_WAYLAND
+	clear
 }
 
 set_background() {
-    swaybg -i "$BACKGROUND"
+	swaybg -i "$BACKGROUND" 2>/dev/null
 }
 
 start_bar() {
-    waybar -c "$HOME"/.config/waybar/config-wayfire
+	waybar -c "$HOME"/.config/waybar/config-wayfire 2>/dev/null
 }
 
 set_idle() {
-    swayidle -w \
-        timeout 300 'lock_screen'
+	swayidle -w \
+		timeout 300 'lock_screen' 2>/dev/null
 }
 
 case "$1" in
-    idle )
-        set_idle
-        ;;
-    background )
-        set_background
-        ;;
-    bar )
-        start_bar
-        ;;
-    * )
-        run_session
-        reset_env
-        ;;
+	idle )
+		set_idle
+		;;
+	background )
+		set_background
+		;;
+	bar )
+		start_bar
+		;;
+	* )
+		if [ -n "$WAYFIRE" ]
+		then
+			run_session
+			reset_env
+		else
+			echo "wayfire command not available."
+			exit 127
+		fi
+		;;
 esac
