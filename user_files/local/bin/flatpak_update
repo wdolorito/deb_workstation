@@ -7,20 +7,20 @@
 FLATPAK="$(which flatpak 2>/dev/null)"
 
 do_error() {
-    printf "\nPlease install flatpak utility\n\n"
-    exit 127
+	printf "\nPlease install flatpak utility\n\n"
+	exit 127
 }
 
 do_update() {
-    echo "Updating user flatpaks..."
-    $FLATPAK --user -y update
-    $FLATPAK --user -y uninstall --unused
-    $FLATPAK --user -y uninstall --delete-data
+	echo "Updating user flatpaks..."
+	$FLATPAK --user -y update
+	$FLATPAK --user -y uninstall --unused
+	$FLATPAK --user -y uninstall --delete-data
 }
 
-if [ -z "$FLATPAK" ]
+if [ -n "$FLATPAK" ]
 then
-    do_error
+	do_update
+else
+	do_error
 fi
-
-do_update
