@@ -6,7 +6,7 @@
 
 GTK_THEME="Adwaita:dark"
 MOZ_ENABLE_WAYLAND="1"
-OBSOCK="$(make_ob_sock)"
+OBSOCK="$(make_ob_sock 2>/dev/null)"
 QT_QPA_PLATFORM="wayland"
 SWAY="$(which sway 2>/dev/null)"
 
