@@ -1,5 +1,5 @@
 #
-# /etc/apt/sources.d/debian.source
+# /etc/apt/sources.d/debian.sources
 #
 
 Types: deb deb-src
