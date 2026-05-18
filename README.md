@@ -24,6 +24,7 @@ cp -r .config .ssh .bash_aliases .fbtermrc .gitconfig ~/
 ```
 * edit ~/.gitconfig and replace ```<your name>``` and ```<your email>```
 * edit ~/.config/waybar/config-* and replace interface name in network section
+* edit ~/.config/waybar/config-* and replace device name in backlight section
 * ```<path to repo>/user_files/bookmarks-debian.json``` can be imported directly in to floorp/firefox browsers
 * ```<path to repo>/user_files/bookmarks-debian.html``` can be used to import bookmarks to other browsers
 
