@@ -4,21 +4,15 @@
 # ~/local/bin/hibernate
 #
 
-CMD=""
+CMD="hibernate"
 LOCK="lock_screen"
 SYSTEMCTL="$(which systemctl 2>/dev/null)"
 
-if [ -z "$SYSTEMCTL" ]
+if [ -n "$SYSTEMCTL" ]
 then
-    exit 127
+	$SYSTEMCTL "$CMD"
+	$LOCK
+else
+	echo "systemctl command not available."
+	exit 127
 fi
-
-CMD="$SYSTEMCTL hibernate"
-
-if ! $CMD
-then
-    printf "\nunable to run \"%s\"\n\n" "$CMD"
-    exit 127
-fi
-
-$LOCK
