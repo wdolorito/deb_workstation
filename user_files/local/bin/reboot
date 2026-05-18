@@ -4,18 +4,13 @@
 # ~/local/bin/reboot
 #
 
-CMD=""
+CMD="reboot"
 SYSTEMCTL="$(which systemctl 2>/dev/null)"
 
-if [ -z "$SYSTEMCTL" ]
+if [ -n "$SYSTEMCTL" ]
 then
-    exit 127
-fi
-
-CMD="$SYSTEMCTL reboot"
-
-if ! $CMD
-then
-    printf "\nunable to run \"%s\"\n\n" "$CMD"
-    exit 127
+	$SYSTEMCTL "$CMD"
+else
+	echo "systemctl command not available."
+	exit 127
 fi
