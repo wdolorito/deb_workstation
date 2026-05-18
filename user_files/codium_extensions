@@ -1,7 +1,7 @@
-https://open-vsx.org/vscode/item?itemName=RokuCommunity.brightscript
-https://open-vsx.org/vscode/item?itemName=llvm-vs-code-extensions.vscode-clangd
-https://open-vsx.org/vscode/item?itemName=waderyan.gitblame
-https://open-vsx.org/vscode/item?itemName=mhutchie.git-graph
-https://open-vsx.org/vscode/item?itemName=paragdiwan.gitpatch
-https://open-vsx.org/vscode/item?itemName=codezombiech.gitignore
-https://open-vsx.org/vscode/item?itemName=timonwong.shellcheck
+RokuCommunity.brightscript
+llvm-vs-code-extensions.vscode-clangd
+waderyan.gitblame
+mhutchie.git-graph
+paragdiwan.gitpatch
+codezombiech.gitignore
+timonwong.shellcheck
