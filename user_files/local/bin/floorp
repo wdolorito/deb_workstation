@@ -43,7 +43,6 @@ check_temp() {
 	esac
 }
 
-
 if [ -z "$FLATPAK" ]
 then
 	echo "flatpak command not available."
