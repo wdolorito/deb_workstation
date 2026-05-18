@@ -13,9 +13,7 @@ pipewire-audio
 pulseaudio-utils
 pavucontrol
 brightnessctl
-# usermod -a -G input <user> (also for keyboard backlight ie. mbp 5,5)
 
-# bluetooth:
 bluez
 bluez-tools
 
@@ -47,9 +45,7 @@ apt-file
 
 acl
 lxc
-# cd <user> && setfacl -m u:<user subuid>:x . .local .local/share
 virt-manager
-# usermod -a -G libvirt <user> (to use virt-manager gui)
 qemu-user-static
 
 flatpak
