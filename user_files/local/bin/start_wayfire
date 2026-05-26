@@ -17,6 +17,7 @@ run_session() {
 	export QT_QPA_PLATFORM
 	export MOZ_ENABLE_WAYLAND
 	bright 30 false 2>/dev/null
+	cd "$HOME" || exit
 	$WAYFIRE -c "$HOME"/.config/wayfire/wayfire.ini
 }
 
