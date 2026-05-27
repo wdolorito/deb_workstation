@@ -1,25 +1,37 @@
-+++ .bash_logout	2026-05-17 12:21:22.255296719 -0600
-***************
-*** 1,5 ****
---- 1,21 ----
-  # ~/.bash_logout: executed by bash(1) when login shell exits.
-  
-+ if [ "$(loginctl list-sessions | grep -c "$(whoami)")" -eq 2 ]
-+ then
-+ 	if [ -S "$SSH_AUTH_SOCK" ]
-+ 	then
-+ 		if [ -z "$TMUX" ]
-+ 		then
-+ 			for AGENT in $(pgrep ssh-agent)
-+ 				do
-+ 					kill -TERM "$AGENT"
-+ 				done
-+ 
-+ 				rm -f "$SSH_AUTH_SOCK"
-+ 		fi
-+ 	fi
-+ fi
-+ 
-  # when leaving the console clear the screen to increase privacy
-  
-  if [ "$SHLVL" = 1 ]; then
++++ .bash_logout	2026-05-26 18:11:01.121918611 -0600
+@@ -1,5 +1,35 @@
+ # ~/.bash_logout: executed by bash(1) when login shell exits.
+ 
++SESSIONS="$(loginctl list-sessions | grep -c "$(whoami)")"
++FIRSTAGENTFILE="$("$HOME"/.ssh/add_ssh_keys file)"
++FIRSTAGENT="$(loginctl session-status "$(cat "$FIRSTAGENTFILE")" | grep closing | awk '{$1=$1};1' | grep -c "State")"
++
++kill_agent() {
++	if [ -S "$SSH_AUTH_SOCK" ]
++	then
++		if [ -z "$TMUX" ]
++		then
++			for AGENT in $(pgrep ssh-agent)
++				do
++					kill -TERM "$AGENT"
++				done
++
++				rm -f "$SSH_AUTH_SOCK"
++				rm -f "$FIRSTAGENTFILE"
++		fi
++	fi
++}
++
++if [ "$SESSIONS" -eq 2 ]
++then
++	kill_agent
++fi
++
++if [ "$SESSIONS" -eq 3 ] && [ "$FIRSTAGENT" -eq 1 ]
++then
++	kill_agent
++fi
++
+ # when leaving the console clear the screen to increase privacy
+ 
+ if [ "$SHLVL" = 1 ]; then

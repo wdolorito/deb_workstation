@@ -1,0 +1,33 @@
+#
+# ~/.mksh_logout
+#
+
+SESSIONS="$(loginctl list-sessions | grep -c "$(whoami)")"
+FIRSTAGENTFILE="$("$HOME"/.ssh/add_ssh_keys file)"
+FIRSTAGENT="$(loginctl session-status "$(cat "$FIRSTAGENTFILE")" | grep closing | awk '{$1=$1};1' | grep -c "State")"
+
+kill_agent() {
+	if [ -S "$SSH_AUTH_SOCK" ]
+	then
+		if [ -z "$TMUX" ]
+		then
+			for AGENT in $(pgrep ssh-agent)
+				do
+					kill -TERM "$AGENT"
+				done
+
+				rm -f "$SSH_AUTH_SOCK"
+				rm -f "$FIRSTAGENTFILE"
+		fi
+	fi
+}
+
+if [ "$SESSIONS" -eq 2 ]
+then
+	kill_agent
+fi
+
+if [ "$SESSIONS" -eq 3 ] && [ "$FIRSTAGENT" -eq 1 ]
+then
+	kill_agent
+fi
