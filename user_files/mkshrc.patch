@@ -1,4 +1,4 @@
-+++ .mkshrc	2026-01-18 17:16:07.102950142 -0700
++++ .mkshrc	2026-05-26 18:16:16.836069970 -0600
 @@ -18,7 +18,7 @@
  [[ -s /etc/mkshrc ]] && \. /etc/mkshrc
  
@@ -8,14 +8,15 @@
  
  # prepend $debian_chroot support to PS1
  p=$'\001'
-@@ -50,4 +50,20 @@
+@@ -50,4 +50,23 @@
  #\\builtin export LANG=C.UTF-8 LC_CTYPE=C.UTF-8
  #\\builtin export LC_ALL=C.UTF-8
  
+-\: make sure this is the last line, to ensure a good return code
 +\\builtin export HISTFILE="$HOME"/.mksh_history
 +
 +# ssh-agent
-+if [ -z "$SSH_AUTH_SOCK" ]
++if [ -z "$SSH_AUTH_SOCK" ] && ! [ "$TERM_PROGRAM" = "vscode" ]
 +then
 +       \\builtin export SSH_AUTH_SOCK="$HOME"/.ssh/ssh-agent.socket
 +       \\builtin export SSH_ASKPASS_REQUIRE="never"
@@ -23,9 +24,12 @@
 +
 +"$HOME"/.ssh/add_ssh_keys
 +
++\\builtin alias lxc-start='lxc-unpriv-start'
++\\builtin alias lxc-attach='lxc-unpriv-attach'
++
 +if [ "$TERM" = "linux" ]
 +then
 +        "$HOME"/local/bin/start_tmux
 +fi
 +
- \: make sure this is the last line, to ensure a good return code
++trap "$(which mksh) $HOME/.mksh_logout" 0
